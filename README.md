@@ -29,9 +29,9 @@ PalliNet will not only provide access to palliative care specialists, but also p
 
 ### :radioactive: Known Issues:
 * Calendar UI has a two weeks button that will crash the app
-* When scheduling a new appointment, the appointment list will not update until the user exits the page and re-enters
 * The calendar when in scheduling appointments has an overflow when using a specific appointment type
 * Flex widget breaks when going into patient details
+* Clicking on physician profile will cause the physican home to have two instances, one before the changes were made and one after the changes are made.
  
 ## Version 0.2.0 
 ### :health_worker: New Features:
