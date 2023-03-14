@@ -17,15 +17,21 @@ PalliNet will not only provide access to palliative care specialists, but also p
 * Patient charts visible, and connected to database
 * Detailed medications/treatment view with precautions/instructions respectively
 * Ability to edit practioner profile information from physicians view
-* Added reschedule and cancel appaointment button --in testing--
-* Connected appointments to database --in progress--
-* Polished UI for detailed patient information --in progress--
+* Added reschedule and cancel appointment button
+* Connected appointments to database
+* Appointment detailes can be viewed
+* Polished UI for detailed patient information
+* Updated pain diary questions
+* When scheduling an appointment, physicians can see a calendar wiew of other appointments
 
 ### :hammer_and_wrench: Bug Fixes:
-*
+* When creating a new user account, the app will no longer return an error saying account is not created if additional contact info is not filled out
 
 ### :radioactive: Known Issues:
-*
+* Calendar UI has a two weeks button that will crash the app
+* When scheduling a new appointment, the appointment list will not update until the user exits the page and re-enters
+* The calendar when in scheduling appointments has an overflow
+* Flex widget breaks when going into patient details
  
 ## Version 0.2.0 
 ### :health_worker: New Features:
