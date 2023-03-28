@@ -215,10 +215,9 @@ void updateEndOfLifePlans(Map<String, dynamic> payload) async {
 }
 
 // Retrieve patient profile given uid
-Future<PatientID>? retrievePatientProfile(uid) async {
+Future<Patient>? retrievePatientProfile(uid) async {
   debugPrint("retrievePatientsProfile");
   // Retrieve patient using corresponding uid
-  debugPrint(uid);
   Map<dynamic, dynamic> patientInfo = await db
       .collection("Patient")
       .doc(uid)
@@ -227,54 +226,7 @@ Future<PatientID>? retrievePatientProfile(uid) async {
     return doc.data() as Map<String, dynamic>;
   }, onError: (e) => debugPrint("Error getting document: $e"));
 
-  // Parse information to be usable for model
-  Gender gender = patientInfo["gender"] == "Male" ? Gender.male : Gender.female;
-  Timestamp t = patientInfo["birthdate"] as Timestamp;
-  DateTime birthdate = t.toDate();
-
-  // Convert to Patient model and return
-  PatientID patient = PatientID(
-      patientInfo["name"]["text"], gender, patientInfo["id"], birthdate);
-
-  return patient;
-}
-
-// TODO Hardcoded right now for debugging patient login
-// Retrieve patient profile given uid
-Future<Patient>? retrievePatientProfile2() async {
-  debugPrint("retrievePatientsProfile");
-  // Retrieve patient using corresponding uid
-  Map<dynamic, dynamic> patientInfo = await db
-      .collection("Patient")
-      .doc('mpMQADgfZqMPo25LQkw8ZcgKmTw2')
-      .get()
-      .then((DocumentSnapshot doc) {
-    return doc.data() as Map<String, dynamic>;
-  }, onError: (e) => debugPrint("Error getting document: $e"));
-
-  // Parse information to be usable for model
-  Gender gender = patientInfo["gender"] == "Male" ? Gender.male : Gender.female;
-  Timestamp t = patientInfo["birthdate"] as Timestamp;
-  DateTime birthdate = t.toDate();
-  Name patientName;
-  patientName = Name(
-      patientInfo["name"]["family"],
-      patientInfo["name"]["given"],
-      patientInfo["name"]["text"],
-      patientInfo["name"]["text"]);
-
-  // Convert to Patient model and return
-  Patient patient = Patient(
-      patientInfo['active'],
-      birthdate,
-      gender,
-      patientInfo['generalPractitioner'],
-      patientInfo["id"],
-      patientInfo["identifier"],
-      patientInfo["description"],
-      patientName);
-
-  return patient;
+  return Patient.fromJson(patientInfo);
 }
 
 //TODO Retrieve physician profile (currently hardcoded))

@@ -1,18 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pallinet/constants.dart';
 import 'package:pallinet/models/name_model.dart';
 
 class Patient {
-  final bool active;
-  final DateTime birthdate;
-  final Gender gender;
-  final String generalPractitioner;
-  final String id;
-  final String identifier;
-  final String description;
-  final Name name;
+  late bool active;
+  late DateTime birthdate;
+  late Gender gender;
+  late String generalPractitioner;
+  late String id;
+  late String identifier;
+  late String description;
+  late Name name;
 
   Patient(this.active, this.birthdate, this.gender, this.generalPractitioner,
       this.id, this.identifier, this.description, this.name);
+
+  Patient.fromJson(Map<dynamic, dynamic> json) {
+    active = json['active'];
+    birthdate = (json['birthdate'] as Timestamp).toDate();
+    gender = json["gender"] == "Male" ? Gender.male : Gender.female;
+    generalPractitioner = json['generalPractitioner'];
+    id = json['id'];
+    identifier = json['identifier'];
+    description = json['description'];
+    name = Name.fromJson(json['name']);
+  }
 }
 
 class PatientID {

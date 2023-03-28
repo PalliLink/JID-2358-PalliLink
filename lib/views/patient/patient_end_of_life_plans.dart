@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pallinet/components/loading.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:pallinet/models/patient_model.dart';
+import 'package:pallinet/models/session_manager.dart';
 
 class EndOfLifePlansView extends StatelessWidget {
   const EndOfLifePlansView({super.key});
@@ -24,6 +25,14 @@ class PlanContent extends StatefulWidget {
 }
 
 class PlanContentState extends State<PlanContent> {
+  late final SessionManager _prefs;
+
+  @override
+  void initState() {
+    _prefs = SessionManager();
+    super.initState();
+  }
+
   bool isPasswordVisible = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -32,8 +41,8 @@ class PlanContentState extends State<PlanContent> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Patient>(
-        future: retrievePatientProfile2(),
+    return FutureBuilder<Patient?>(
+        future: _prefs.getUid().then((uid) => retrievePatientProfile(uid)),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             Patient? patData = snapshot.data;
