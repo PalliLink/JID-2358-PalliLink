@@ -149,6 +149,36 @@ class PatientDetails extends StatelessWidget {
                             )),
                       ),
                     ),
+                  )),
+                  const SizedBox(height: 20),
+                  Expanded(
+                      child: Center(
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.lightBlue[200],
+                      child: InkWell(
+                        onTap: () {
+                          // debugPrint(arguments.toString());
+                          Navigator.pushNamed(
+                            context,
+                            "/chart",
+                            arguments: arguments,
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            width: 350,
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "Pain Charts",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 26,
+                              ),
+                            )),
+                      ),
+                    ),
                   ))
                 ],
               ));
