@@ -26,12 +26,12 @@ class ProfileContentState extends State<ProfileContent> {
   void dispose() {
     super.dispose();
   }
-
-  String? desc = "gkyhuiadfs";
-  String? name = "fsafadsfasdf";
-  String? email = "fdafadsfdasf";
-  String? phoneNumber = "fdafasddasfasd";
-  String? location = "fadfdasf";
+  
+  String? desc;
+  String? name;
+  String? email;
+  String? phoneNumber;
+  String? location;
 
   bool _edit = false; // false means cannot edit, true means can edit
 
@@ -64,7 +64,9 @@ class ProfileContentState extends State<ProfileContent> {
                       "email": email,
                       "phone": phoneNumber
                     };
-                    updatePhysicianProfile(payload);
+                    _prefs
+                        .getUid()
+                        .then((uid) => {updatePhysicianProfile(uid!, payload)});
                   }
                 }
                 setState(() {

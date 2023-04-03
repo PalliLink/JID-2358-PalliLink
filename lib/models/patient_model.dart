@@ -6,7 +6,6 @@ class Patient {
   late bool active;
   late DateTime birthdate;
   late Gender gender;
-
   late String? generalPractitioner;
   late String id;
   late String? identifier;
