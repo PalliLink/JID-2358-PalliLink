@@ -151,7 +151,9 @@ FlTitlesData title(List<LineChartBarData> list) {
                 return Text(style: const TextStyle(fontSize: 14), label);
               }),
               // interval: (Duration.millisecondsPerDay / 2).toDouble()
-              interval: (list[0].spots.last.x - list[0].spots.first.x) / 2)));
+              interval: list[0].spots.length != 1
+                  ? (list[0].spots.last.x - list[0].spots.first.x) / 2
+                  : (Duration.millisecondsPerDay / 2).toDouble())));
 }
 
 String _twoDigits(int n) {
