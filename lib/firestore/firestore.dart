@@ -59,6 +59,7 @@ Future<List<dynamic>>? retrieveEntries(uid) async {
   return list;
 }
 
+
 Future<List<dynamic>>? retrieveEntries2(id) async {
   //used from practitioner end
   debugPrint("Retrieve entries");
@@ -79,7 +80,6 @@ Future<List<dynamic>>? retrieveEntries2(id) async {
   return list;
 }
 
-// TODO used in patients_list consolidate w/ retrievePatients2 (currently hardcoded)
 Future<List<dynamic>>? retrievePatients(uid) async {
   debugPrint("retrievePatients");
 
@@ -248,12 +248,8 @@ Future<Patient>? retrievePatientProfile(uid) async {
   return Patient.fromJson(patientInfo);
 }
 
-//TODO Retrieve physician profile (currently hardcoded))
 Future<Physician> retrievePhysicianProfile(uid) async {
   // debugPrint("retrievePhysicianProfile");
-  // Get Physician
-  uid = uid ??
-      "5nsl8S4wXoeNLc6OzVgwJGRBmv62"; // TODO Temp for other hardcoded portions
   var docRef = db.collection("Practitioner").doc(uid);
 
   Map<dynamic, dynamic> list = await docRef.get().then((DocumentSnapshot doc) {

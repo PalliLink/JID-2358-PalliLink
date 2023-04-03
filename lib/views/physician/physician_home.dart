@@ -23,7 +23,6 @@ class _PhysicianHomeState extends State<PhysicianHome> {
 
   @override
   void dispose() {
-    _prefs.clearAll();
     super.dispose();
   }
 
