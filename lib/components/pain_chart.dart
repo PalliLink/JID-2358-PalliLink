@@ -5,7 +5,9 @@ import '../firestore/firestore.dart';
 import '../models/session_manager.dart';
 
 class PainChart extends StatefulWidget {
-  const PainChart({super.key});
+  final String id;
+
+  const PainChart({Key? key, this.id = ''}) : super(key: key);
 
   @override
   State<PainChart> createState() => _PainChart();
@@ -62,8 +64,12 @@ class _PainChart extends State<PainChart> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(widget.id.toString());
     return FutureBuilder<List<dynamic>?>(
-        future: _prefs.getUid().then((uid) => retrieveEntries(uid)),
+        future: widget.id != ''
+            ? retrieveEntries2(widget.id)
+            : _prefs.getUid().then((uid) => retrieveEntries(uid)),
+        // future: _prefs.getUid().then((uid) => retrieveEntries(uid)),
         builder: ((context, snapshot) {
           if (snapshot.data == null) {
             return const SizedBox.shrink();
