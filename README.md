@@ -20,13 +20,13 @@ PalliNet will not only provide access to palliative care specialists, but also p
 ### :hammer_and_wrench: Bug Fixes:
 * Pressing view entries for the pain diary now no longer breaks when there are 1 or no entries
 * Altered previously hardcoded methods to be more flexible
+* Fixed pain diary entry rebuilding bug
+* Fixed physician profile navigation, preventing seeing physician home page twice when leaving profile page
 
 ### :radioactive: Known Issues:
 * Calendar UI has a two weeks button that will crash the app
 * The calendar when in scheduling appointments has an overflow when using a specific appointment type
 * ParentDataWidget breaks when going into patient details
-* Clicking on physician profile will cause the physican home to have two instances, one before the changes were made and one after the changes are made.
-* Pain diary entry introducing constant rebuilding even when not on page
 
 ## Version 0.3.0 
 ### :health_worker: New Features:
