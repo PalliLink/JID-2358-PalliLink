@@ -59,16 +59,14 @@ Future<List<dynamic>>? retrieveEntries(uid) async {
   return list;
 }
 
-// TODO used in patients_list consolidate w/ retrievePatients2 (currently hardcoded)
-Future<List<dynamic>>? retrievePatients() async {
+Future<List<dynamic>>? retrievePatients(uid) async {
   debugPrint("retrievePatients");
 
   Map<dynamic, dynamic> list = await db
       .collection("Practitioner")
-      .doc("5nsl8S4wXoeNLc6OzVgwJGRBmv62")
+      .doc(uid)
       .get()
       .then((DocumentSnapshot doc) {
-    // debugPrint(doc.data().toString());
     return doc.data() as Map<String, dynamic>;
   }, onError: (e) => debugPrint("Error getting document: $e"));
 
