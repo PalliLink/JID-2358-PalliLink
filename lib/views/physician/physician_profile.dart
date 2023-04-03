@@ -26,7 +26,7 @@ class ProfileContentState extends State<ProfileContent> {
   void dispose() {
     super.dispose();
   }
-
+  
   String? desc;
   String? name;
   String? email;
