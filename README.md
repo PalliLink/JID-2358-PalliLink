@@ -28,7 +28,6 @@ PalliNet will not only provide access to palliative care specialists, but also p
 * Clicking on physician profile will cause the physican home to have two instances, one before the changes were made and one after the changes are made.
 * Pain diary entry introducing constant rebuilding even when not on page
 
-# Release Notes: 
 ## Version 0.3.0 
 ### :health_worker: New Features:
 * Week view with availability
