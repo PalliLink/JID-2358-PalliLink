@@ -247,11 +247,9 @@ Future<Physician> retrievePhysicianProfile(uid) async {
   return physician;
 }
 
-// TODO Update Physician profile (currently hardcoded)
-void updatePhysicianProfile(Map<String, dynamic> payload) async {
+void updatePhysicianProfile(String uid, Map<String, dynamic> payload) async {
   debugPrint("updatePhysicianProfile");
-  var docRef =
-      db.collection("Practitioner").doc("5nsl8S4wXoeNLc6OzVgwJGRBmv62");
+  var docRef = db.collection("Practitioner").doc(uid);
 
   await docRef.update({
     "description": payload["description"],
