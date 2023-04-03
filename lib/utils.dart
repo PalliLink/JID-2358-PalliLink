@@ -314,3 +314,7 @@ class PhoneNumberFormatter extends TextInputFormatter {
     return TextSelection.fromPosition(TextPosition(offset: selectionEnd));
   }
 }
+
+refresh(setState) {
+  setState(() {});
+}

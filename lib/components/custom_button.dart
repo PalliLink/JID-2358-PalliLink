@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
+  CustomButton(
       {super.key,
       required this.icon,
       required this.iconColor,
       required this.route,
-      required this.text});
+      required this.text,
+      this.update = false,
+      this.refresh});
 
   final IconData icon;
   final Color iconColor;
   final String route;
   final String text;
+  bool update;
+  final Function? refresh;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => {Navigator.pushNamed(context, route)},
+        onPressed: () {
+          if (!update) {
+            Navigator.pushNamed(context, route);
+          } else {
+            Navigator.pushNamed(context, route).then((_) => refresh!());
+          }
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white, // Background color
         ),

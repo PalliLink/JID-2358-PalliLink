@@ -3,6 +3,7 @@ import 'package:pallinet/components/appointment_card.dart';
 import 'package:pallinet/models/session_manager.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pallinet/utils.dart';
 
 class PatientAppointments extends StatefulWidget {
   const PatientAppointments({super.key});
@@ -27,10 +28,6 @@ class _PatientAppointmentsState extends State<PatientAppointments> {
 
   @override
   Widget build(BuildContext context) {
-    refresh() {
-      setState(() {});
-    }
-
     return Column(children: [
       Expanded(
         flex: 8,
@@ -56,7 +53,7 @@ class _PatientAppointmentsState extends State<PatientAppointments> {
                     date: startTime,
                     appointmentType: data["appointmentType"],
                     id: data["appointmentID"],
-                    refresh: () => refresh(),
+                    refresh: () => refresh(setState),
                   );
                 },
               ),

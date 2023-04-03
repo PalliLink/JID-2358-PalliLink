@@ -4,6 +4,7 @@ import 'package:pallinet/components/loading.dart';
 import 'package:pallinet/models/physician_model.dart';
 import 'package:pallinet/models/session_manager.dart';
 import 'package:pallinet/firestore/firestore.dart';
+import 'package:pallinet/utils.dart';
 
 class PhysicianHome extends StatefulWidget {
   const PhysicianHome({super.key});
@@ -29,7 +30,6 @@ class _PhysicianHomeState extends State<PhysicianHome> {
   @override
   Widget build(BuildContext context) {
     Widget gap() => const SizedBox(height: 30);
-    // double screenWidth = MediaQuery.of(context).size.width;
     String name;
 
     return FutureBuilder<Physician>(
@@ -44,32 +44,34 @@ class _PhysicianHomeState extends State<PhysicianHome> {
               body: ListView(
                 padding: const EdgeInsets.all(15),
                 children: [
-                  const CustomButton(
+                  CustomButton(
                     icon: Icons.assignment_ind,
                     iconColor: Colors.pink,
                     route: '/patients',
                     text: 'Patients',
                   ),
                   gap(),
-                  const CustomButton(
+                  CustomButton(
                     icon: Icons.schedule,
                     iconColor: Colors.pink,
                     route: '/physician/appointments',
                     text: 'Appointments',
                   ),
                   gap(),
-                  const CustomButton(
+                  CustomButton(
                     icon: Icons.people,
                     iconColor: Colors.pink,
                     route: '/contacts',
                     text: 'Messages',
                   ),
                   gap(),
-                  const CustomButton(
+                  CustomButton(
                     icon: Icons.settings,
                     iconColor: Colors.pink,
                     route: '/physician/profile',
                     text: 'View Profile',
+                    update: true,
+                    refresh: () => refresh(setState),
                   ),
                 ],
               ),
