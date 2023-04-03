@@ -6,14 +6,15 @@ class Patient {
   late bool active;
   late DateTime birthdate;
   late Gender gender;
-  late String generalPractitioner;
+
+  late String? generalPractitioner;
   late String id;
-  late String identifier;
-  late String description;
+  late String? identifier;
+  late String? description;
   late Name name;
 
-  Patient(this.active, this.birthdate, this.gender, this.generalPractitioner,
-      this.id, this.identifier, this.description, this.name);
+  Patient(this.active, this.birthdate, this.gender, this.id, this.identifier,
+      this.generalPractitioner, this.description, this.name);
 
   Patient.fromJson(Map<dynamic, dynamic> json) {
     active = json['active'];

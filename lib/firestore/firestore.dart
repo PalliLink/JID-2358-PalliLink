@@ -59,6 +59,27 @@ Future<List<dynamic>>? retrieveEntries(uid) async {
   return list;
 }
 
+
+Future<List<dynamic>>? retrieveEntries2(id) async {
+  //used from practitioner end
+  debugPrint("Retrieve entries");
+
+  final patientRef = await db
+      .collection("Patient")
+      .where('id', isEqualTo: id)
+      .get()
+      .then((res) {
+    return res.docs.single.reference;
+  });
+
+  QuerySnapshot querySnapshot = await patientRef.collection("PainDiary").get();
+  List<dynamic> list = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+  // debugPrint("out");
+  // debugPrint(list.toString());
+  return list;
+}
+
 Future<List<dynamic>>? retrievePatients(uid) async {
   debugPrint("retrievePatients");
 
