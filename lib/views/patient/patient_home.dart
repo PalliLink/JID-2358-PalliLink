@@ -55,6 +55,13 @@ class _PatientHomeState extends State<PatientHome> {
                 ),
                 gap(),
                 const CustomButton(
+                    icon: Icons.people,
+                    iconColor: Colors.pink,
+                    route: '/contacts',
+                    text: 'Messages',
+                  ),
+                gap(),
+                const CustomButton(
                   icon: Icons.health_and_safety_outlined,
                   iconColor: Colors.red,
                   route: '/patient/treatments',

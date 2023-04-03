@@ -98,7 +98,7 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                             child: Text(
                               painDiaryQuestions[questionNum],
                               style: const TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                               ),
                             )),
                       ),
