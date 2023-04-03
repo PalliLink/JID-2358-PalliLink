@@ -23,8 +23,9 @@ class CustomButton extends StatelessWidget {
         onPressed: () {
           if (!update) {
             Navigator.pushNamed(context, route);
+          } else {
+            Navigator.pushNamed(context, route).then((_) => refresh!());
           }
-          Navigator.pushNamed(context, route).then((_) => refresh!());
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white, // Background color
