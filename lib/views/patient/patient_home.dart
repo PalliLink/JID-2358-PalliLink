@@ -38,7 +38,7 @@ class _PatientHomeState extends State<PatientHome> {
             body: ListView(
               padding: const EdgeInsets.all(15),
               children: [
-                const CustomButton(
+                CustomButton(
                   icon: Icons.calendar_month_rounded,
                   iconColor: Color.fromRGBO(64, 192, 251, 1),
                   route: '/patient/calendar',
@@ -47,35 +47,35 @@ class _PatientHomeState extends State<PatientHome> {
                 gap(),
                 const SizedBox(height: 300, child: PainDiary()),
                 gap(),
-                const CustomButton(
+                CustomButton(
                   icon: Icons.schedule,
                   iconColor: Color.fromRGBO(64, 192, 251, 1),
                   route: '/patient/appointments',
                   text: 'Appointments',
                 ),
                 gap(),
-                const CustomButton(
+                CustomButton(
                   icon: Icons.health_and_safety_outlined,
                   iconColor: Colors.red,
                   route: '/patient/treatments',
                   text: 'Treatments',
                 ),
                 gap(),
-                const CustomButton(
+                CustomButton(
                   icon: Icons.medication,
                   iconColor: Colors.purpleAccent,
                   route: '/patient/medications',
                   text: 'Medications',
                 ),
                 gap(),
-                const CustomButton(
+                CustomButton(
                   icon: Icons.local_hospital,
                   iconColor: Colors.green,
                   route: '/patient/recommendedspecialists',
                   text: 'Recommended Specialists',
                 ),
                 gap(),
-                const CustomButton(
+                CustomButton(
                   icon: Icons.list_alt_sharp,
                   iconColor: Colors.redAccent,
                   route: '/patient/endoflifeplans',
