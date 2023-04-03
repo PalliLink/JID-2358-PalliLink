@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pallinet/components/loading.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:pallinet/models/physician_model.dart';
+import 'package:pallinet/models/session_manager.dart';
 
 class ProfileContent extends StatefulWidget {
   const ProfileContent({Key? key}) : super(key: key);
@@ -12,6 +13,19 @@ class ProfileContent extends StatefulWidget {
 
 class ProfileContentState extends State<ProfileContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late final SessionManager _prefs;
+
+  @override
+  void initState() {
+    _prefs = SessionManager();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   String? desc = "gkyhuiadfs";
   String? name = "fsafadsfasdf";
@@ -61,7 +75,8 @@ class ProfileContentState extends State<ProfileContent> {
           ],
         ),
         body: FutureBuilder<Physician>(
-            future: retrievePhysicianProfile(null),
+            future:
+                _prefs.getUid().then((uid) => retrievePhysicianProfile(uid)),
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
                 Physician? physData = snapshot.data;

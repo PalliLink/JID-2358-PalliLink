@@ -227,12 +227,8 @@ Future<Patient>? retrievePatientProfile(uid) async {
   return Patient.fromJson(patientInfo);
 }
 
-//TODO Retrieve physician profile (currently hardcoded))
 Future<Physician> retrievePhysicianProfile(uid) async {
   // debugPrint("retrievePhysicianProfile");
-  // Get Physician
-  uid = uid ??
-      "5nsl8S4wXoeNLc6OzVgwJGRBmv62"; // TODO Temp for other hardcoded portions
   var docRef = db.collection("Practitioner").doc(uid);
 
   Map<dynamic, dynamic> list = await docRef.get().then((DocumentSnapshot doc) {
