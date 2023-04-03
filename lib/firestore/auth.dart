@@ -1,5 +1,4 @@
 
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ SessionManager prefs = SessionManager();
 Future<bool> createPatient(payload) async {
   List<String> birthdate = payload["birthdate"].split("/");
   //maximum number the ID can reach. Can be changed if all the IDs are occupied 
-  const int maxID = 9000000;
+  const int lengthID = 7;
   try {
     final credential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -23,28 +22,12 @@ Future<bool> createPatient(payload) async {
     String uid = credential.user!.uid;
     bool check = true;
     String id = "";
-    Random rand = Random();
-    int loopError = 0;
-    //continually loops until it creates a unique ID for the patient
-    while(check && loopError < maxID + 1000000) {
-      int randID = rand.nextInt(maxID) + 1000000;
-      //Query database for IDs matching the randomly generated one.
-      QuerySnapshot result = (await db.collection("Patient")
-        .where('id', isEqualTo: randID.toString()).get());
-      List<QueryDocumentSnapshot<Object?>> newResult = result.docs;
-      int count = newResult.length;
-      if (count == 0) {
-        id = randID.toString();
-        break;
-      }
-      //If it loops for too long, then we've either created the max number of possible patients with
-      //this length of ID or there was just an error and we must break out of it
-      loopError++;
-    }
-    if (loopError >= maxID + 1000000) {
-      debugPrint("Error assigning ID. Maximum number of patients reached");
-      return false;
-    }
+    QuerySnapshot result = await db.collection("Patient").get();
+    List<QueryDocumentSnapshot<Object?>> newResult = result.docs;
+    //Indicing from 1
+    id = (newResult.length + 1).toString().padLeft(lengthID, '0');
+    
+
     // Create patient
     db.collection("Patient").doc(uid).set({
       "active": true,
@@ -52,7 +35,7 @@ Future<bool> createPatient(payload) async {
           int.parse(birthdate[1])),
       "deceasedBoolean": false,
       "gender": payload["gender"].value,
-      "id": id, 
+      "id": "PA-$id", 
       "name": {
         "family": payload["lastName"],
         "given": payload["firstName"],
