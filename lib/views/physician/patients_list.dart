@@ -1,6 +1,7 @@
 import 'package:age_calculator/age_calculator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pallinet/components/loading.dart';
 import 'package:pallinet/components/patient_card.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:pallinet/models/session_manager.dart';
@@ -13,7 +14,6 @@ class PatientList extends StatefulWidget {
 }
 
 class _PatientListState extends State<PatientList> {
-  // final test = retrievePatients();
   late final SessionManager _prefs;
 
   @override
@@ -26,20 +26,18 @@ class _PatientListState extends State<PatientList> {
   void dispose() {
     super.dispose();
   }
-  
-  //TODO create retrieve id method in firestore to get physician ID and then put into retrievePatients()
-
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future: retrievePatients(),
+    return FutureBuilder<List<dynamic>?>(
+      future: _prefs.getUid().then((uid) => retrievePatients(uid)),
       builder: ((context, snapshot) {
-        final list = snapshot.data == null
-            ? []
-            : (snapshot.data as List)
-                .map((e) => e as Map<String, dynamic>)
-                .toList();
+        if (!snapshot.hasData) {
+          return const LoadingScreen("Loading Patients");
+        }
+
+        final list = snapshot.data ?? [];
+
         return Scaffold(
           appBar: AppBar(title: const Text("Patients")),
           body: ListView.builder(
