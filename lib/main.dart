@@ -30,6 +30,7 @@ import 'package:pallinet/views/forget_password.dart';
 import 'package:pallinet/views/forgot_password_success.dart';
 import 'package:pallinet/views/patient/patient_end_of_life_plans.dart';
 import 'package:pallinet/views/detailed_appointment_view.dart';
+import 'package:pallinet/views/contacts_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,6 +83,7 @@ class PalliNet extends StatelessWidget {
           '/physician/profile': (context) => const ProfileContent(),
           '/forgotsuccess': (context) => const ForgotSuccess(),
           '/chart': (context) => const Chart(),
+          '/contacts': (context) => const ContactsPage()
         },
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const HomePage()));
