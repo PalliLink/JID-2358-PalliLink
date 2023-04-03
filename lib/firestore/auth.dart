@@ -22,10 +22,9 @@ Future<bool> createPatient(payload) async {
     String uid = credential.user!.uid;
     bool check = true;
     String id = "";
-    QuerySnapshot result = await db.collection("Patient").get();
-    List<QueryDocumentSnapshot<Object?>> newResult = result.docs;
+    AggregateQuerySnapshot result = await db.collection("Patient").count().get();
     //Indicing from 1
-    id = (newResult.length + 1).toString().padLeft(lengthID, '0');
+    id = (result.count + 1).toString().padLeft(lengthID, '0');
     
 
     // Create patient
