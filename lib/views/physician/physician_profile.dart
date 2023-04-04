@@ -26,7 +26,7 @@ class ProfileContentState extends State<ProfileContent> {
   void dispose() {
     super.dispose();
   }
-  
+
   String? desc;
   String? name;
   String? email;
@@ -42,7 +42,7 @@ class ProfileContentState extends State<ProfileContent> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.popAndPushNamed(context, "/physician/home");
+              Navigator.pop(context);
             },
           ),
           title: const Text('Profile'),
