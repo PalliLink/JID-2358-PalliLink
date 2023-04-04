@@ -11,6 +11,23 @@ We are creating PalliNet in order to make palliative care specialists more acces
 PalliNet will not only provide access to palliative care specialists, but also provide an easy way for primary healthcare providers to see how patients react to care and plan repeat appointments and/or referrals to specialists
 
 # Release Notes: 
+## Version 0.4.0 
+### :health_worker: New Features:
+* Setup barebone chat UI
+* Set up UI for a patient to add themselves to a specialist's patient list
+* Access to a patient's pain charts is available through the detailed patient view
+
+### :hammer_and_wrench: Bug Fixes:
+* Pressing view entries for the pain diary now no longer breaks when there are 1 or no entries
+* Altered previously hardcoded methods to be more flexible
+* Fixed pain diary entry rebuilding bug
+* Fixed physician profile navigation, preventing seeing physician home page twice when leaving profile page
+
+### :radioactive: Known Issues:
+* Calendar UI has a two weeks button that will crash the app
+* The calendar when in scheduling appointments has an overflow when using a specific appointment type
+* ParentDataWidget breaks when going into patient details
+
 ## Version 0.3.0 
 ### :health_worker: New Features:
 * Week view with availability

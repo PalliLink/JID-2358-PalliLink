@@ -34,7 +34,7 @@ void addData(UnmodifiableMapView<int, int> entries, uid) async {
 }
 
 Future<Map<dynamic, dynamic>>? retrieveQuestions() async {
-  // debugPrint("Retrieve Questions");
+  debugPrint("============Retrieve Questions");
 
   Map<dynamic, dynamic> list = await db
       .collection("Pain Diary Questions")

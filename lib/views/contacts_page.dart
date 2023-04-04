@@ -7,10 +7,11 @@ class ContactsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(title: const Text("Messages")),
         body: Center(
       child: Column(
         children: [
-          Text("contacts_page"),
+          Text("contacts"),
         ],
       ),
     ));

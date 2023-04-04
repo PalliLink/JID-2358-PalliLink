@@ -19,17 +19,13 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
   @override
   void initState() {
     _prefs = SessionManager();
+    _prefs.getUid().then(
+          (value) => uid = value,
+        );
     super.initState();
   }
 
-  List<dynamic> painDiaryQuestions = <String>[
-    // "'Question 1",
-    // "Question 2",
-    // "Question 3",
-    // "Question 4",
-    // "Question 5",
-    ""
-  ];
+  List<dynamic> painDiaryQuestions = [""];
   List<dynamic> questionTypes = [""];
   bool init = true;
 
@@ -42,11 +38,7 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
     final arguments = ModalRoute.of(context)?.settings.arguments ?? '';
     debugPrint(arguments.toString());
     double screenheight = MediaQuery.of(context).size.height;
-    _prefs.getUid().then((id) {
-      setState(() {
-        uid = id;
-      });
-    });
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("New Pain Diary Entry"),
@@ -98,7 +90,7 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                             child: Text(
                               painDiaryQuestions[questionNum],
                               style: const TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                               ),
                             )),
                       ),

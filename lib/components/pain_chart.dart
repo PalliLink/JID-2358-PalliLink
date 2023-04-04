@@ -38,7 +38,7 @@ List<LineChartBarData> getChartData(List<dynamic> list, int length) {
 
       DateTime d = list[j]["timestamp"].toDate();
       d.millisecondsSinceEpoch;
-      temp[d] = list[j]["q$i"];
+      temp[d] = list[j]["q$i"] ?? 0;
     }
     debugPrint(temp.toString());
 

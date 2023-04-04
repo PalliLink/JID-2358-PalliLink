@@ -31,7 +31,7 @@ class PatientDetails extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(20.0))),
               alignment: const Alignment(-.8, -.3),
               child: Text('MRN:'
-                  '\nMarried$mrn '
+                  '$mrn'
                   '\n'
                   '\nDOB:'
                   '\n${DateFormat('MM-dd-yyyy').format(age)}'
@@ -120,7 +120,7 @@ class PatientDetails extends StatelessWidget {
                   ),
                   // const SizedBox(height: 24),
                   buildInfo(datas['name']['text'], datas['gender'], birthdate,
-                      datas['maritalStatus']),
+                      datas['id']),
                   gap(),
                   buildButtons(),
                   const SizedBox(height: 30),
