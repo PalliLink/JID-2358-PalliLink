@@ -136,9 +136,7 @@ Future<List<Treatment>>? retrieveTreatments(uid) async {
   return treatments;
 }
 
-// TODO this might be wrong? Check if still works with const.dart
-// TODO this is probably broken rn, need to fix database entries so that field
-// TODO name is consistent (birthdate instead of birthdate) (currently hardcoded)
+// TODO currently hardcoded
 Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo() async {
   debugPrint("retrieveAppointmentCreationInfo");
 

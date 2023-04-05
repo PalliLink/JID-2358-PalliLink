@@ -26,9 +26,6 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
     super.initState();
   }
 
-  int questionNum = 0;
-  double input = 0;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<dynamic, dynamic>>(
@@ -137,12 +134,10 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                                 duration: const Duration(
                                                     milliseconds: 300),
                                                 curve: Curves.ease);
-                                            // debugPrint(model.entries.toString());
                                           },
                                           child: const Text("Next Question"))
                                       : OutlinedButton(
                                           onPressed: () {
-                                            // debugPrint(uid);
                                             model.submit(uid);
                                             Navigator.pop(context);
                                           },
