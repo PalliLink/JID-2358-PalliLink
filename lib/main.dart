@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pallinet/components/scheduler.dart';
 import 'package:pallinet/views/chart.dart';
 import 'package:pallinet/views/patient/calendar.dart';
 import 'package:pallinet/views/patient/new_account.dart';

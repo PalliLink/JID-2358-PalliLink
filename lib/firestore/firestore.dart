@@ -7,7 +7,6 @@ import 'package:pallinet/models/medication_model.dart';
 import 'package:pallinet/models/treatment_model.dart';
 import 'package:pallinet/models/patient_model.dart';
 import '../models/physician_model.dart';
-import 'package:pallinet/models/name_model.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 

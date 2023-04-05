@@ -154,8 +154,8 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                                           questionNum] !=
                                                       index)
                                                     {
-                                                      model.update(questionNum,
-                                                          index) //TODO change back to `index`
+                                                      model.update(
+                                                          questionNum, index)
                                                     },
                                                   input = index.toDouble()
                                                 }));
@@ -192,7 +192,6 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                           painDiaryQuestions.length - 1
                                       ? OutlinedButton(
                                           onPressed: () => {
-                                                //TODO uncomment
                                                 model.update(
                                                     questionNum, input.round()),
                                                 input = 0,

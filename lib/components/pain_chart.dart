@@ -103,13 +103,13 @@ class _PainChart extends State<PainChart> {
                               // debugPrint(flSpot.barIndex.toString());
                               return LineTooltipItem(
                                 'q${spot.barIndex.toInt()}: ',
-                                TextStyle(
+                                const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                                 children: [
                                   TextSpan(
                                     text: spot.y.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),

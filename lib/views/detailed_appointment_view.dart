@@ -33,7 +33,7 @@ class AppointmentPage extends StatelessWidget {
           String id = arguments.toString();
 
           return Scaffold(
-              appBar: AppBar(title: Text("Appointment")),
+              appBar: AppBar(title: const Text("Appointment")),
               body: ListView(
                 children: [
                   Text('Appointment Type: ${datas['appointmentType']}',

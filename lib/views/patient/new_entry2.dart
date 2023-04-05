@@ -43,8 +43,6 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
 
         int length = questionTypes.length;
 
-        List<double> responses = List.filled(length, 0, growable: false);
-
         PageController pc = PageController();
         return Scaffold(
             appBar: AppBar(
@@ -158,7 +156,6 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                     );
                   },
                 )));
-        ;
       },
     );
   }

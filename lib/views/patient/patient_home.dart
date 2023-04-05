@@ -5,7 +5,6 @@ import 'package:pallinet/components/loading.dart';
 import 'package:pallinet/components/pain_diary.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:pallinet/models/patient_model.dart';
-import 'package:pallinet/models/physician_model.dart';
 import 'package:pallinet/models/session_manager.dart';
 
 class PatientHome extends StatefulWidget {
