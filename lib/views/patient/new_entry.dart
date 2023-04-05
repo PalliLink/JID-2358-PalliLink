@@ -150,15 +150,12 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                                           fontSize: 25)),
                                                 )),
                                             onTap: () => {
-                                                  // debugPrint(model
-                                                  //     .entries[questionNum]
-                                                  //     .toString()),
                                                   if (model.entries[
                                                           questionNum] !=
                                                       index)
                                                     {
-                                                      model.update(
-                                                          questionNum, index)
+                                                      model.update(questionNum,
+                                                          index) //TODO change back to `index`
                                                     },
                                                   input = index.toDouble()
                                                 }));
@@ -195,6 +192,7 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                           painDiaryQuestions.length - 1
                                       ? OutlinedButton(
                                           onPressed: () => {
+                                                //TODO uncomment
                                                 model.update(
                                                     questionNum, input.round()),
                                                 input = 0,

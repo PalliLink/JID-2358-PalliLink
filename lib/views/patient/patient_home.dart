@@ -40,7 +40,7 @@ class _PatientHomeState extends State<PatientHome> {
               children: [
                 CustomButton(
                   icon: Icons.calendar_month_rounded,
-                  iconColor: Color.fromRGBO(64, 192, 251, 1),
+                  iconColor: const Color.fromRGBO(64, 192, 251, 1),
                   route: '/patient/calendar',
                   text: 'Calendar',
                 ),
@@ -49,17 +49,17 @@ class _PatientHomeState extends State<PatientHome> {
                 gap(),
                 CustomButton(
                   icon: Icons.schedule,
-                  iconColor: Color.fromRGBO(64, 192, 251, 1),
+                  iconColor: const Color.fromRGBO(64, 192, 251, 1),
                   route: '/patient/appointments',
                   text: 'Appointments',
                 ),
                 gap(),
                 CustomButton(
-                    icon: Icons.people,
-                    iconColor: Colors.pink,
-                    route: '/contacts',
-                    text: 'Messages',
-                  ),
+                  icon: Icons.people,
+                  iconColor: Colors.pink,
+                  route: '/contacts',
+                  text: 'Messages',
+                ),
                 gap(),
                 CustomButton(
                   icon: Icons.health_and_safety_outlined,

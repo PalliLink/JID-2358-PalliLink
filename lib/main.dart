@@ -15,7 +15,7 @@ import 'package:pallinet/views/physician/physician_appointments.dart';
 import 'package:pallinet/views/physician/physician_home.dart';
 import 'package:pallinet/views/physician/physician_login.dart';
 import 'package:pallinet/views/physician/provider_landing_view.dart';
-import 'package:pallinet/views/patient/new_entry.dart';
+import 'package:pallinet/views/patient/new_entry2.dart';
 import 'package:pallinet/views/login_view.dart';
 import 'package:pallinet/views/home_view.dart';
 import 'package:pallinet/views/physician/patients_list.dart';

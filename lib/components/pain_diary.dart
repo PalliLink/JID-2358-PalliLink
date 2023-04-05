@@ -11,7 +11,6 @@ class PainDiary extends StatefulWidget {
 }
 
 class _PainDiary extends State<PainDiary> {
-  // const PainDiary({super.key});
   late final SessionManager _prefs;
 
   @override
@@ -28,22 +27,20 @@ class _PainDiary extends State<PainDiary> {
   }
 
   DataRow getRow(Map<String, dynamic> map, int length) {
-    // debugPrint("GET ROW");
     List<DataCell> entries = [];
+    // map.forEach((key, value) {
+    //   String? s = value.toString();
+    //   entries.add(DataCell(Text(s)));
+    // });
     for (var i = 0; i < length - 1; i++) {
-      // entries.add(map["q$i"]);
-      // debugPrint(map["q$i"].toString());
       if (map["q$i"] != null) {
         String s = map["q$i"].toString();
         entries.add(DataCell(Text(s)));
       } else {
         entries.add(const DataCell(Text("NULL")));
       }
-      // debugPrint("added $i");
     }
     entries.add(DataCell(Text(map["timestamp"].toDate().toString())));
-    // debugPrint("ENTRIES");
-    // debugPrint(entries.toString());
 
     return DataRow(cells: entries);
   }
@@ -53,21 +50,11 @@ class _PainDiary extends State<PainDiary> {
     return FutureBuilder<List<dynamic>?>(
       future: _prefs.getUid().then((uid) => retrieveEntries(uid)),
       builder: ((context, snapshot) {
-        if (snapshot.data == null) {
-          return const SizedBox.shrink();
+        if (!snapshot.hasData) {
+          return const Text("Loading pain diary");
         }
 
         final list = snapshot.data as List;
-        // debugPrint(list.first);
-        // int length;
-        // if (snapshot.data?.length == 0) {
-        //   length = 0;
-        // } else {
-        //   length = list[0]
-        // }
-        // debugPrint("list");
-        // debugPrint(list.toString());
-        // debugPrint(list.runtimeType.toString());
 
         return Scaffold(
             appBar: AppBar(
@@ -105,19 +92,20 @@ class _PainDiary extends State<PainDiary> {
                                 const EdgeInsets.only(right: 10, bottom: 5),
                             child: OutlinedButton(
                                 onPressed: () => {
-                                      if (list.length == 0)
+                                      if (list.isEmpty)
                                         {
                                           showDialog(
                                               context: context,
-                                              builder: (context) => AlertDialog(
-                                                  title: Text(
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      "Error"),
-                                                  content: Text(
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      "No Pain Diary entries logged")))
+                                              builder: (context) =>
+                                                  const AlertDialog(
+                                                      title: Text(
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          "Error"),
+                                                      content: Text(
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          "No Pain Diary entries logged")))
                                         }
                                       else
                                         {Navigator.pushNamed(context, "/chart")}
@@ -131,7 +119,7 @@ class _PainDiary extends State<PainDiary> {
                                       Navigator.pushNamed(
                                         context,
                                         "/patient/diary/new",
-                                      ),
+                                      ).then((_) => setState(() {})),
                                     },
                                 child: const Text("New Entry")))
                       ],
