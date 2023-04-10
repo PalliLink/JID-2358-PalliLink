@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ SessionManager prefs = SessionManager();
 
 Future<bool> createPatient(payload) async {
   List<String> birthdate = payload["birthdate"].split("/");
-  //maximum number the ID can reach. Can be changed if all the IDs are occupied 
+  //maximum number the ID can reach. Can be changed if all the IDs are occupied
   const int lengthID = 7;
   try {
     final credential =
@@ -20,12 +19,11 @@ Future<bool> createPatient(payload) async {
       password: payload['password'],
     );
     String uid = credential.user!.uid;
-    bool check = true;
     String id = "";
-    AggregateQuerySnapshot result = await db.collection("Patient").count().get();
+    AggregateQuerySnapshot result =
+        await db.collection("Patient").count().get();
     //Indicing from 1
     id = (result.count + 1).toString().padLeft(lengthID, '0');
-    
 
     // Create patient
     db.collection("Patient").doc(uid).set({
@@ -34,7 +32,7 @@ Future<bool> createPatient(payload) async {
           int.parse(birthdate[1])),
       "deceasedBoolean": false,
       "gender": payload["gender"].value,
-      "id": "PA-$id", 
+      "id": "PA-$id",
       "name": {
         "family": payload["lastName"],
         "given": payload["firstName"],

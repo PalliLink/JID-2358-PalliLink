@@ -10,7 +10,7 @@ class TreatmentsRecommended extends StatelessWidget {
       appBar: AppBar(title: const Text("Reccomended Treatments")),
       body: ListView(
         padding: const EdgeInsets.all(8),
-        children: [Text("testing")],
+        children: const [Text("testing")],
       ),
     );
   }

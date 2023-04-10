@@ -150,9 +150,6 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                                           fontSize: 25)),
                                                 )),
                                             onTap: () => {
-                                                  // debugPrint(model
-                                                  //     .entries[questionNum]
-                                                  //     .toString()),
                                                   if (model.entries[
                                                           questionNum] !=
                                                       index)

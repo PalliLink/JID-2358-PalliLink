@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pallinet/components/loading.dart';
-import 'package:pallinet/components/medications_card.dart';
-import 'package:pallinet/firestore/firestore.dart';
-import 'package:pallinet/models/medication_model.dart';
 import 'package:pallinet/models/session_manager.dart';
 
 import '../components/pain_chart.dart';

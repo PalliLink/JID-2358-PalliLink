@@ -5,15 +5,14 @@ class ContactsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: const Text("Messages")),
+        appBar: AppBar(title: const Text("Messages")),
         body: Center(
-      child: Column(
-        children: [
-          Text("contacts"),
-        ],
-      ),
-    ));
+          child: Column(
+            children: const [
+              Text("contacts"),
+            ],
+          ),
+        ));
   }
 }
