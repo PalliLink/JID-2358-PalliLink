@@ -204,7 +204,8 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                           onPressed: () => {
                                                 model.update(
                                                     questionNum, input.round()),
-                                                model.submit(uid),
+                                                model.submit(uid,
+                                                    painDiaryQuestions.length),
                                                 Navigator.pushNamed(
                                                     context, "/patient/home")
                                               },

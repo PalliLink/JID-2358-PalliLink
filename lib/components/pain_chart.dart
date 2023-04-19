@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 
 import '../firestore/firestore.dart';
 import '../models/session_manager.dart';
+import 'package:collection/collection.dart';
 
 class PainChart extends StatefulWidget {
   final String id;
@@ -13,7 +14,8 @@ class PainChart extends StatefulWidget {
   State<PainChart> createState() => _PainChart();
 }
 
-List<LineChartBarData> getChartData(List<dynamic> list, int length) {
+List<LineChartBarData> getChartData(
+    List<dynamic> list, int length, String dropdown) {
   List<dynamic> colors = [
     Colors.pink,
     Colors.red,
@@ -32,18 +34,29 @@ List<LineChartBarData> getChartData(List<dynamic> list, int length) {
   List<LineChartBarData> out = [];
   Map<DateTime, int> temp = {};
   debugPrint("start");
-  for (var i = 0; i < length; i++) {
+  debugPrint(dropdown);
+  int i = 0;
+  int end = length;
+  // HARD-CODED
+  if (dropdown == "additional") {
+    i = 10;
+    debugPrint("additional");
+  } else {
+    end = 9;
+  }
+  // if drop == "additional"
+  for (i; i < end; i++) {
     for (var j = 0; j < list.length; j++) {
       // debugPrint(temp.toString());
 
       DateTime d = list[j]["timestamp"].toDate();
       d.millisecondsSinceEpoch;
-      temp[d] = list[j]["q$i"] ?? 0;
+      temp[d] = list[j]["q$i"];
     }
     debugPrint(temp.toString());
 
     out.add(LineChartBarData(
-        color: colors[i],
+        color: colors[i % 9],
         spots: temp.entries.map((e) {
           return FlSpot(
               e.key.millisecondsSinceEpoch.toDouble(), e.value.toDouble());
@@ -55,6 +68,8 @@ List<LineChartBarData> getChartData(List<dynamic> list, int length) {
 
 class _PainChart extends State<PainChart> {
   late final SessionManager _prefs;
+  List<String> itemList = <String>["main", "additional"];
+  late String dropdownValue = itemList.first;
 
   @override
   void initState() {
@@ -85,45 +100,70 @@ class _PainChart extends State<PainChart> {
           debugPrint(list[0]["timestamp"].runtimeType.toString());
           return Scaffold(
               appBar: AppBar(title: const Text("Pain Chart")),
-              body: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: AspectRatio(
-                    aspectRatio: 0.75,
-                    child: LineChart(LineChartData(
-                        // minX: 0, maxX: 10, minY: 0, maxY: 10,
-
-                        titlesData:
-                            title(getChartData(list, list[0].length - 1)),
-                        lineTouchData: LineTouchData(
-                            touchTooltipData: LineTouchTooltipData(
-                          // getTooltipItems: (value) => LineTooltipItem(value.y) as List<LineTooltipItem>),
-                          getTooltipItems: (List<LineBarSpot> spots) {
-                            List<LineTooltipItem> out = spots.map((barSpot) {
-                              final spot = barSpot;
-                              // debugPrint(flSpot.barIndex.toString());
-                              return LineTooltipItem(
-                                'q${spot.barIndex.toInt()}: ',
-                                const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: spot.y.toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
+              body: Column(children: <Widget>[
+                DropdownButton(
+                  value: dropdownValue,
+                  icon: const Icon(Icons.arrow_downward),
+                  style: const TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      dropdownValue = value!;
+                    });
+                  },
+                  items: itemList.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                Container(
+                    height: 600,
+                    child: AspectRatio(
+                        aspectRatio: 0.75,
+                        child: LineChart(LineChartData(
+                            // minX: 0, maxX: 10, minY: 0, maxY: 10,
+                            minY: 0,
+                            maxY: 10,
+                            titlesData: title(getChartData(
+                                list, list[0].length - 1, dropdownValue)),
+                            lineTouchData: LineTouchData(
+                                touchTooltipData: LineTouchTooltipData(
+                              // getTooltipItems: (value) => LineTooltipItem(value.y) as List<LineTooltipItem>),
+                              getTooltipItems: (List<LineBarSpot> spots) {
+                                List<LineTooltipItem> out =
+                                    spots.map((barSpot) {
+                                  final spot = barSpot;
+                                  // debugPrint(flSpot.barIndex.toString());
+                                  return LineTooltipItem(
+                                    'q${dropdownValue == "main" ? spot.barIndex.toInt() : spot.barIndex.toInt() + 9}: ',
+                                    TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ),
-                                ],
-                                textAlign: TextAlign.center,
-                              );
-                            }).toList();
-                            // debugPrint(out.toString());
-                            out.sort((a, b) => a.text.compareTo(b.text));
-                            return out;
-                          },
-                        )),
-                        lineBarsData: getChartData(list, list[0].length - 1)))),
-              ));
+                                    children: [
+                                      TextSpan(
+                                        text: spot.y.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                    textAlign: TextAlign.center,
+                                  );
+                                }).toList();
+                                // debugPrint(out.toString());
+                                out.sort(
+                                    (a, b) => compareNatural(a.text, b.text));
+                                return out;
+                              },
+                            )),
+                            lineBarsData: getChartData(
+                                list, list[0].length - 1, dropdownValue)))))
+              ]));
         }));
   }
 }

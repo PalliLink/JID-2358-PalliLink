@@ -14,8 +14,8 @@ class EntryModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submit(uid) {
-    addData(entries, uid);
+  void submit(uid, length) {
+    addData(entries, uid, length);
     debugPrint(entries.toString());
     removeAll();
   }

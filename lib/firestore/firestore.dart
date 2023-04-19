@@ -11,16 +11,21 @@ import '../models/physician_model.dart';
 FirebaseFirestore db = FirebaseFirestore.instance;
 
 // Pain Diary
-void addData(UnmodifiableMapView<int, int> entries, uid) async {
+void addData(UnmodifiableMapView<int, int> entries, uid, int length) async {
   // Create a new user with a first and last name
   final storedEntries = <String, dynamic>{};
 
   DateTime timeSubmitted = DateTime.now();
   storedEntries["timestamp"] = timeSubmitted;
 
-  for (int i = 0; i < entries.length; i++) {
-    storedEntries["q$i"] = entries[i];
+  for (int i = 0; i < length; i++) {
+    if (!entries.containsKey(i)) {
+      storedEntries["q$i"] = 0;
+    } else {
+      storedEntries["q$i"] = entries[i];
+    }
   }
+  debugPrint("entries: ${storedEntries.toString()}");
 
   //add entry into patient database
   db

@@ -39,6 +39,7 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
         List<String> questionTypes = List<String>.from(snapshot.data!["type"]);
 
         int length = questionTypes.length;
+        int breakpoint = 9; // HARD CODED
 
         PageController pc = PageController();
         return Scaffold(
@@ -55,6 +56,40 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                   itemBuilder: (BuildContext context, int index) {
                     Widget question;
                     switch (questionTypes[index]) {
+                      case "tf":
+                        question = Consumer<EntryModel>(
+                          builder: (context, model, child) {
+                            return ListView.separated(
+                                padding: const EdgeInsets.all(10),
+                                itemCount: 2,
+                                itemBuilder: (BuildContext context, int ind) {
+                                  return InkWell(
+                                    child: Container(
+                                        height: 60,
+                                        color: model.entries[index] == ind
+                                            ? Colors.purpleAccent
+                                            : Colors.white,
+                                        child: Center(
+                                          child: Text(
+                                              ind == 0 ? "True" : "False",
+                                              style: const TextStyle(
+                                                  fontSize: 25)),
+                                        )),
+                                    onTap: () {
+                                      model.update(index, ind);
+                                    },
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context,
+                                        int index) =>
+                                    const Divider(
+                                      thickness: 2,
+                                      color: Color.fromARGB(255, 95, 95, 95),
+                                    ));
+                          },
+                        );
+                        break;
+
                       case "slider":
                       case "slider4":
                         int div = questionTypes[index] == "slider4" ? 4 : 10;
@@ -130,15 +165,22 @@ class NewPainDiaryEntryState extends State<NewPainDiaryEntry> {
                                   return index != length - 1
                                       ? OutlinedButton(
                                           onPressed: () {
-                                            pc.nextPage(
-                                                duration: const Duration(
-                                                    milliseconds: 300),
-                                                curve: Curves.ease);
+                                            if (index == breakpoint &&
+                                                model.entries[index] != 0) {
+                                              model.submit(uid, length);
+                                              debugPrint("early submit");
+                                              Navigator.pop(context);
+                                            } else {
+                                              pc.nextPage(
+                                                  duration: const Duration(
+                                                      milliseconds: 300),
+                                                  curve: Curves.ease);
+                                            }
                                           },
                                           child: const Text("Next Question"))
                                       : OutlinedButton(
                                           onPressed: () {
-                                            model.submit(uid);
+                                            model.submit(uid, length);
                                             Navigator.pop(context);
                                           },
                                           child: const Text("Submit"));
