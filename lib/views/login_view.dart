@@ -13,7 +13,7 @@ class LoginLandingPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: Text(
-              'PalliNet',
+              'PalliLink',
               style: Theme.of(context).textTheme.headline5,
             ),
           ),

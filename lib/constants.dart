@@ -1,7 +1,7 @@
 enum ServiceType {
   officeVisit("Office Visit"),
   procedure("Procedure"),
-  video("PalliNet Video Call");
+  video("PalliLink Video Call");
 
   final String value;
 
