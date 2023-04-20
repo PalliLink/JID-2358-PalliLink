@@ -23,8 +23,6 @@ class _ChartState extends State<Chart> {
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)?.settings.arguments ?? '';
     // debugPrint(arguments.toString());
-    return Container(
-        padding: const EdgeInsets.all(15),
-        child: PainChart(id: arguments.toString()));
+    return PainChart(id: arguments.toString());
   }
 }
