@@ -84,7 +84,6 @@ class _PainChart extends State<PainChart> {
         future: widget.id != ''
             ? retrieveEntries2(widget.id)
             : _prefs.getUid().then((uid) => retrieveEntries(uid)),
-        // future: _prefs.getUid().then((uid) => retrieveEntries(uid)),
         builder: ((context, snapshot) {
           if (snapshot.data == null) {
             return const SizedBox.shrink();
@@ -121,12 +120,11 @@ class _PainChart extends State<PainChart> {
                     );
                   }).toList(),
                 ),
-                Container(
-                    height: 600,
+                Padding(
+                    padding: const EdgeInsets.only(right: 13.0),
                     child: AspectRatio(
-                        aspectRatio: 0.75,
+                        aspectRatio: 3 / 4,
                         child: LineChart(LineChartData(
-                            // minX: 0, maxX: 10, minY: 0, maxY: 10,
                             minY: 0,
                             maxY: 10,
                             titlesData: title(getChartData(
@@ -141,13 +139,13 @@ class _PainChart extends State<PainChart> {
                                   // debugPrint(flSpot.barIndex.toString());
                                   return LineTooltipItem(
                                     'q${dropdownValue == "main" ? spot.barIndex.toInt() : spot.barIndex.toInt() + 9}: ',
-                                    TextStyle(
+                                    const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                     children: [
                                       TextSpan(
                                         text: spot.y.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w900,
                                         ),
                                       ),
