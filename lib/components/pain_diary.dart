@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../firestore/firestore.dart';
 import '../models/session_manager.dart';
+import 'package:collection/collection.dart';
 
 class PainDiary extends StatefulWidget {
   const PainDiary({super.key});
@@ -20,7 +21,7 @@ class _PainDiary extends State<PainDiary> {
   }
 
   List<DataColumn> getCol(List<String> col) {
-    col.sort();
+    col.sort(compareNatural);
     List<DataColumn> dataColumns =
         col.map((string) => DataColumn(label: Text(string))).toList();
     return dataColumns;
