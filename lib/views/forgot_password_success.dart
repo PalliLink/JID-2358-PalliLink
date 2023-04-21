@@ -13,7 +13,7 @@ class ForgotSuccess extends StatelessWidget {
                 ? Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      Logo(),
+                      _Logo(),
                     ],
                   )
                 : Container(
@@ -21,15 +21,15 @@ class ForgotSuccess extends StatelessWidget {
                     constraints: const BoxConstraints(maxWidth: 800),
                     child: Row(
                       children: const [
-                        Expanded(child: Logo()),
+                        Expanded(child: _Logo()),
                       ],
                     ),
                   )));
   }
 }
 
-class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
 
   Widget gap() => const SizedBox(height: 30);
 

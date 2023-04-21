@@ -200,7 +200,7 @@ attemptLogin(payload, context) {
         if (status == AuthStatus.success)
           {Navigator.pushNamed(context, "/patient/home")}
         else
-          {showSnackbar(context, status)}
+          {_showSnackbar(context, status)}
       });
 }
 
@@ -208,33 +208,7 @@ debugLogin(context) {
   debugPatient().then((val) => {Navigator.pushNamed(context, "/patient/home")});
 }
 
-showAlertDialog(BuildContext context) {
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Error"),
-    content: const Text("Incorrect password or error!"),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
-
-showSnackbar(BuildContext context, AuthStatus status) {
+_showSnackbar(BuildContext context, AuthStatus status) {
   final snackBar = status == AuthStatus.success
       ? SnackBar(
           content: Text(status.value),
