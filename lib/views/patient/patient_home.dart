@@ -75,7 +75,7 @@ class _PatientHomeState extends State<PatientHome> {
                 ),
                 gap(),
                 CustomButton(
-                  icon: Icons.local_hospital,
+                  icon: Icons.person_search,
                   iconColor: Colors.green,
                   route: '/patient/recommendedspecialists',
                   text: 'Recommended Specialists',
@@ -86,6 +86,13 @@ class _PatientHomeState extends State<PatientHome> {
                   iconColor: Colors.redAccent,
                   route: '/patient/endoflifeplans',
                   text: 'End of Life Plans',
+                ),
+                gap(),
+                CustomButton(
+                  icon: Icons.local_hospital,
+                  iconColor: Colors.green,
+                  route: '/facilities',
+                  text: 'Facilities',
                 ),
               ],
             ),

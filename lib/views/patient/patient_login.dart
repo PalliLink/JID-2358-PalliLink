@@ -127,7 +127,7 @@ class FormContentState extends State<FormContent> {
                 onPressed: () {
                   _formKey.currentState?.save();
                   if (_formKey.currentState?.validate() ?? false) {
-                    attemptLogin({
+                    _attemptLogin({
                       "email": email,
                       "password": password,
                       "userType": UserType.patient,
@@ -173,7 +173,7 @@ class FormContentState extends State<FormContent> {
                   ),
                 ),
                 onPressed: () {
-                  debugLogin(context);
+                  _debugLogin(context);
                 },
               ),
             ),
@@ -195,7 +195,7 @@ class FormContentState extends State<FormContent> {
   Widget gap() => const SizedBox(height: 16);
 }
 
-attemptLogin(payload, context) {
+_attemptLogin(payload, context) {
   signIn(payload).then((status) => {
         if (status == AuthStatus.success)
           {Navigator.pushNamed(context, "/patient/home")}
@@ -204,7 +204,7 @@ attemptLogin(payload, context) {
       });
 }
 
-debugLogin(context) {
+_debugLogin(context) {
   debugPatient().then((val) => {Navigator.pushNamed(context, "/patient/home")});
 }
 
