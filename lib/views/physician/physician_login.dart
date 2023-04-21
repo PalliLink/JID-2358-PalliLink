@@ -138,25 +138,26 @@ class FormContentState extends State<FormContent> {
               ),
             ),
             gap(),
-            // SizedBox(
-            //   // DEBUGGING LOGIN
-            //   width: double.infinity,
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            //     ),
-            //     child: const Padding(
-            //       padding: EdgeInsets.all(10.0),
-            //       child: Text(
-            //         'DEBUGGING LOGIN',
-            //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       debugLogin(context);
-            //     },
-            //   ),
-            // ),
+            SizedBox(
+              // DEBUGGING LOGIN
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'DEBUGGING LOGIN',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                onPressed: () {
+                  debugLogin(context);
+                },
+              ),
+            ),
             InkWell(
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
