@@ -89,7 +89,8 @@ class PlanContentState extends State<PlanContent> {
                           };
                           // debugPrint("3");
                           // debugPrint(desc);
-                          updateEndOfLifePlans(payload);
+                          _prefs.getUid().then(
+                              (uid) => {updateEndOfLifePlans(payload, uid!)});
                           Navigator.pushNamed(context, "/patient/home");
                         },
                         child: const Text("Change End of Life Plans"))
