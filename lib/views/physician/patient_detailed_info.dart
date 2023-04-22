@@ -45,57 +45,53 @@ class PatientDetails extends StatelessWidget {
       ]);
 
   Widget buildButtons() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Expanded(
-              child: Center(
-            child: Material(
+          Material(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.lightBlue[200],
+            child: InkWell(
+              onTap: () {
+                debugPrint('Medical');
+              },
               borderRadius: BorderRadius.circular(20),
-              color: Colors.lightBlue[200],
-              child: InkWell(
-                onTap: () {
-                  debugPrint('Medical');
-                },
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                    width: 150,
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Medical History",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 26,
-                      ),
-                    )),
-              ),
+              child: Container(
+                  width: 150,
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Medical History",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 26,
+                    ),
+                  )),
             ),
-          )),
-          Expanded(
-              child: Center(
-            child: Material(
+          ),
+          Material(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.lightBlue[200],
+            child: InkWell(
+              onTap: () {
+                debugPrint('Surgical');
+              },
               borderRadius: BorderRadius.circular(20),
-              color: Colors.lightBlue[200],
-              child: InkWell(
-                onTap: () {
-                  debugPrint('Surgical');
-                },
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                    width: 150,
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Surgical History",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 26,
-                      ),
-                    )),
-              ),
+              child: Container(
+                  width: 150,
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Surgical History",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 26,
+                    ),
+                  )),
             ),
-          ))
+          ),
         ],
       );
+
   @override
   Widget build(BuildContext context) {
     debugPrint(ModalRoute.of(context)?.settings.arguments.toString());
@@ -124,8 +120,7 @@ class PatientDetails extends StatelessWidget {
                   gap(),
                   buildButtons(),
                   const SizedBox(height: 30),
-                  Expanded(
-                      child: Center(
+                  Center(
                     child: Material(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.lightBlue[200],
@@ -149,10 +144,9 @@ class PatientDetails extends StatelessWidget {
                             )),
                       ),
                     ),
-                  )),
+                  ),
                   const SizedBox(height: 20),
-                  Expanded(
-                      child: Center(
+                  Center(
                     child: Material(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.lightBlue[200],
@@ -179,7 +173,7 @@ class PatientDetails extends StatelessWidget {
                             )),
                       ),
                     ),
-                  ))
+                  ),
                 ],
               ));
         } else {
