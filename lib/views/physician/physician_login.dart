@@ -154,7 +154,7 @@ class _FormContentState extends State<_FormContent> {
                   ),
                 ),
                 onPressed: () {
-                  debugLogin(context);
+                  _debugLogin(context);
                 },
               ),
             ),
