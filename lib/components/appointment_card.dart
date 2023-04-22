@@ -56,8 +56,7 @@ class AppointmentCard extends StatelessWidget {
                         arguments: id);
                   } else if (value == 1) {
                   } else if (value == 2) {
-                    CancelDialog(context, id, name, date, refresh);
-                    // debugPrint(id);
+                    cancelDialog(context, id, name, date, refresh);
                   }
                 },
               ),
