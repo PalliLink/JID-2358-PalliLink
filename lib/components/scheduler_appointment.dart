@@ -38,7 +38,6 @@ class SchedulerAppointments extends StatelessWidget {
 
   getChildren(date, unitWidth, unitHeight, context) {
     List<Positioned> children = [];
-
     for (var appointment in physicianAppointments) {
       DateTime start = appointment["timeStart"];
       DateTime end = appointment["timeEnd"];
@@ -48,6 +47,7 @@ class SchedulerAppointments extends StatelessWidget {
             top: unitHeight * topOffsetFactor(start),
             left: unitWidth * leftOffsetFactor(start),
             child: Container(
+              clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColorLight,
                   border: Border.all(
@@ -60,12 +60,16 @@ class SchedulerAppointments extends StatelessWidget {
               width: unitWidth - 2,
               child: Column(
                 children: [
-                  Text(
-                    appointment["patient"],
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  Text(appointment["appointmentType"],
-                      style: Theme.of(context).textTheme.labelMedium)
+                  Text(appointment["patient"],
+                      style: Theme.of(context).textTheme.labelLarge,
+                      overflow: TextOverflow.ellipsis),
+                  unitHeight * lengthFactor(start, end) > 50
+                      ? Text(
+                          appointment["appointmentType"],
+                          style: Theme.of(context).textTheme.labelMedium,
+                          overflow: TextOverflow.clip,
+                        )
+                      : const SizedBox.shrink()
                 ],
               ),
             )));
@@ -75,7 +79,9 @@ class SchedulerAppointments extends StatelessWidget {
   }
 }
 
-int leftOffsetFactor(DateTime date) => date.weekday + 1;
+int leftOffsetFactor(DateTime date) =>
+    date.weekday != 7 ? (date.weekday + 1) : 1;
+
 int topOffsetFactor(DateTime date) =>
     date.subtract(const Duration(hours: 8)).hour; //hardcoded for 8-5
 double lengthFactor(DateTime start, DateTime end) =>

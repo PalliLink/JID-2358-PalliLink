@@ -141,22 +141,21 @@ Future<List<Treatment>>? retrieveTreatments(uid) async {
   return treatments;
 }
 
-// TODO currently hardcoded
-Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo() async {
+Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo(uid) async {
   debugPrint("retrieveAppointmentCreationInfo");
+  // debugPrint(uid);
 
   //retrieving patients
-  Map<dynamic, dynamic> list = await db
-      .collection("Practitioner")
-      .doc("5nsl8S4wXoeNLc6OzVgwJGRBmv62")
-      .get()
-      .then((DocumentSnapshot doc) {
+  final pracRef = db.collection("Practitioner").doc(uid);
+
+  Map<dynamic, dynamic> list = await pracRef.get().then((DocumentSnapshot doc) {
     return doc.data() as Map<String, dynamic>;
   }, onError: (e) => debugPrint("Error getting document: $e"));
 
+  String physID = list["id"];
+
   // parsing patient list
   List<dynamic> data = list["patients"];
-  // debugPrint(data.toString());
   List<PatientID> patients = data.map((e) {
     Gender gender = e["gender"] == "M" ? Gender.male : Gender.female;
     Timestamp t = e["birthdate"] as Timestamp;
@@ -166,11 +165,10 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo() async {
   }).toList();
 
   // retrieving physcian availability
-  List<QueryDocumentSnapshot<Map<dynamic, dynamic>>> availability = await db
-      .collection("Appointment")
-      .where("practitioner", isEqualTo: "2222222")
-      .get()
-      .then((res) {
+  final apptRef =
+      db.collection("Appointment").where("practitioner", isEqualTo: physID);
+  List<QueryDocumentSnapshot<Map<dynamic, dynamic>>> availability =
+      await apptRef.get().then((res) {
     return res.docs;
   }, onError: (e) => debugPrint("Error getting document: $e"));
 
@@ -198,21 +196,21 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo() async {
   return map;
 }
 
-// TODO Create appointment (currently hardcoded) once schedule page has physician, pass uid on when click create appointment
-void createAppointment(Map<String, dynamic> payload) async {
+void createAppointment(Map<String, dynamic> payload, String? uid) async {
   debugPrint("createAppointment");
 
   final docRef = db.collection("Appointment").doc();
 
+  Physician phys = await retrievePhysicianProfile(uid);
+
   await docRef.set({
     "appointmentID": docRef.id,
     "patient": payload["patient"],
-    "practitioner": "2222222", // temp practicioner id
+    "practitioner": phys.id,
     "appointmentType": payload["type"],
     "description": payload["description"],
     "created": DateTime.now(),
     "serviceCategory": "appointment",
-
     "scheduledTimeStart": payload["scheduledTimeStart"],
     "scheduledTimeEnd": payload["scheduledTimeEnd"],
   });
