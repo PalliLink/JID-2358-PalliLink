@@ -1,35 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:pallinet/views/chart.dart';
-import 'package:pallinet/views/patient/calendar.dart';
-import 'package:pallinet/views/patient/new_account.dart';
-import 'package:pallinet/views/patient/patient_home.dart';
-import 'package:pallinet/views/patient/patient_login.dart';
-import 'package:pallinet/views/patient/recommendedspecialists_view.dart';
-//import 'package:pallinet/views/patient/treatments_view.dart';
-import 'package:pallinet/views/physician/physician_profile.dart';
-import 'package:pallinet/views/physician/patient_detailed_info.dart';
-import 'package:pallinet/views/physician/edit_patient_info.dart';
-import 'package:pallinet/views/physician/create_appointment.dart';
-import 'package:pallinet/views/physician/physician_appointments.dart';
-import 'package:pallinet/views/physician/physician_home.dart';
-import 'package:pallinet/views/physician/physician_login.dart';
-import 'package:pallinet/views/physician/provider_landing_view.dart';
-import 'package:pallinet/views/patient/new_entry2.dart';
-import 'package:pallinet/views/login_view.dart';
-import 'package:pallinet/views/home_view.dart';
-import 'package:pallinet/views/physician/patients_list.dart';
-import 'package:pallinet/views/prescriptions_detailed_view.dart';
-import 'package:pallinet/views/medications_view.dart';
-import 'package:pallinet/views/treatments_view.dart';
-import 'package:pallinet/views/patient/patient_appointments.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:pallinet/views/symptoms.dart';
 import 'firebase_options.dart';
-import 'package:pallinet/views/forget_password.dart';
-import 'package:pallinet/views/forgot_password_success.dart';
-import 'package:pallinet/views/patient/patient_end_of_life_plans.dart';
-import 'package:pallinet/views/detailed_appointment_view.dart';
-import 'package:pallinet/views/contacts_page.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'views/views.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,10 +32,8 @@ class PalliNet extends StatelessWidget {
           '/patient/medications': (context) => const Medications(),
           '/patient/recommendedspecialists': (context) =>
               const RecommendedSpecialists(),
-          // '/prescriptionssummary': (context) => const PrescriptionsSummary(),
           '/prescriptionsdetailedview': (context) =>
               const PrescriptionsDetailedView(),
-
           '/patient/endoflifeplans': (context) => const EndOfLifePlansView(),
           '/patient/treatments': (context) => const Treatments(),
           '/patient/diary/new': (context) => const NewPainDiaryEntry(),
@@ -82,7 +52,8 @@ class PalliNet extends StatelessWidget {
           '/physician/profile': (context) => const ProfileContent(),
           '/forgotsuccess': (context) => const ForgotSuccess(),
           '/chart': (context) => const Chart(),
-          '/contacts': (context) => const ContactsPage()
+          '/contacts': (context) => const ContactsPage(),
+          '/facilities': (context) => const FacilitiesPage(),
         },
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const HomePage()));
