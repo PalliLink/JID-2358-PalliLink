@@ -50,7 +50,7 @@ class CustomButton extends StatelessWidget {
                 flex: 9,
                 child: Text(
                   text,
-                  style: const TextStyle(fontSize: 30, color: Colors.black),
+                  style: const TextStyle(fontSize: 29, color: Colors.black),
                 )),
           ],
         ));
