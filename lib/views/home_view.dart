@@ -20,14 +20,14 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Text(
-                'PalliNet',
+                'PalliLink',
                 style: Theme.of(context).textTheme.headline2,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 80.0),
               child: Text(
-                'Care for living',
+                'Care for the living',
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),
