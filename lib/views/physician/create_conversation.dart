@@ -105,13 +105,12 @@ class ConversationContentState extends State<ConversationContent> {
                             Map<String, dynamic> payload = {
                               "patient": patient!.name,
                               "patient_id": patient!.id,
-                              "practitioner": practitioners,
-                              "description": desc,
+                              "message": desc,
                             };
                             _prefs.getUid().then(
                                 (value) => createConversation(payload, value));
                             // CreateConversation(payload);
-
+                            
                             Navigator.pop(context);
                           
                         },

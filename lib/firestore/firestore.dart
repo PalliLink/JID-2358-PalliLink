@@ -444,7 +444,17 @@ Future<Map<String, dynamic>>? retrieveChatCreationInfo(uid) async {
 
     return PatientID(e["name"], gender, e["id"], birthdate);
   }).toList();
+  for(int i = patients.length - 1; i > -1; i--) {
+     QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user1', isEqualTo: patients[i].id)
+      .get();
+    final allData = chats.docs.map((doc) => doc.data()).toList();
+    if (allData.length > 0) {
+      patients.remove(patients[i]);
+    }
 
+  }
   Map<String, dynamic> map = {};
   map["patients"] = patients;
   return map;
@@ -453,19 +463,29 @@ Future<Map<String, dynamic>>? retrieveChatCreationInfo(uid) async {
 void createConversation(Map<String, dynamic> payload, String? uid) async {
 
   final docRef = db.collection("Chats").doc();
-  final docRefMessage = db.collection("Chats").doc(docRef.id).collection("Messages");
+  final docRefMessage = db.collection("Chats").doc(docRef.id).collection("Messages").doc();
+
   Physician phys = await retrievePhysicianProfile(uid);
+  String user1 = payload["patient_id"];
+  String user2 = phys.id;
+  String user1Name = payload["patient"];
+  String user2Name = phys.name;
+  String message = payload["message"];
+
   DateTime date = DateTime.now();
-  Timestamp lastSent = Timestamp.fromDate(date);
+  Timestamp timeSent = Timestamp.fromDate(date);
   await docRef.set({
-    "appointmentID": docRef.id,
-    "patient": payload["patient"],
-    "practitioner": phys.id,
-    "appointmentType": payload["type"],
-    "description": payload["description"],
-    "created": DateTime.now(),
-    "serviceCategory": "appointment",
-    "scheduledTimeStart": payload["scheduledTimeStart"],
-    "scheduledTimeEnd": payload["scheduledTimeEnd"],
+    "chatID": docRef.id,
+    "lastMessage": message,
+    "time_sent": timeSent,
+    "user1": user1,
+    "user1_name": user1Name,
+    "user2": user2,
+    "user2_name": user2Name,
+  });
+  await docRefMessage.set({
+    "message": docRef.id,
+    "senderID": message,
+    "time_sent": timeSent,
   });
 }
