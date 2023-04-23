@@ -114,7 +114,7 @@ class ConversationContentState extends State<ConversationContent> {
                             Navigator.pop(context);
                           
                         },
-                        child: const Text("Create Appointment"))
+                        child: const Text("Create Chat Room"))
                   ],
                 ),
               ),
