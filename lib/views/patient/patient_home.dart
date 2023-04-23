@@ -37,13 +37,13 @@ class _PatientHomeState extends State<PatientHome> {
             body: ListView(
               padding: const EdgeInsets.all(15),
               children: [
-                CustomButton(
-                  icon: Icons.calendar_month_rounded,
-                  iconColor: const Color.fromRGBO(64, 192, 251, 1),
-                  route: '/patient/calendar',
-                  text: 'Calendar',
-                ),
-                gap(),
+                // CustomButton(
+                //   icon: Icons.calendar_month_rounded,
+                //   iconColor: const Color.fromRGBO(64, 192, 251, 1),
+                //   route: '/patient/calendar',
+                //   text: 'Calendar',
+                // ),
+                // gap(),
                 const SizedBox(height: 300, child: PainDiary()),
                 gap(),
                 CustomButton(
