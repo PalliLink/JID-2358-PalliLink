@@ -12,26 +12,24 @@ class HomePage extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage("assets/images/naturebackground.jpg"),
               fit: BoxFit.cover,
-              opacity: 0.35)),
+              opacity: 0.2)),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: Text(
-                'PalliLink',
-                style: Theme.of(context).textTheme.headline2,
-              ),
+            const FractionallySizedBox(
+              widthFactor: .80,
+              child: Image(
+                  image: AssetImage("assets/images/pallilink.webp"),
+                  fit: BoxFit.fitWidth),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 80.0),
-              child: Text(
-                'Care for the living',
-                style: Theme.of(context).textTheme.headline5,
-              ),
+            const SizedBox(height: 10),
+            Text(
+              'Care for the living',
+              style: Theme.of(context).textTheme.headline6,
             ),
-            OutlinedButton(
+            const SizedBox(height: 30),
+            ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/login");
               },
