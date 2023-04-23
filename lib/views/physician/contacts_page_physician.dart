@@ -46,7 +46,7 @@ class _ContactsPagePhysicianState extends State<ContactsPagePhysician> {
                     .map((e) => e as Map<String, dynamic>)
                     .toList();
             return Scaffold(
-              appBar: AppBar(title: const Text("Chats")),
+              appBar: AppBar(title: const Text("Current Chats")),
               body: ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, int index) {

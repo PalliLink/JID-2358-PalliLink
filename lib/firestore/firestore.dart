@@ -410,7 +410,6 @@ Future<List<dynamic>> retrieveMessagesPatients(uid) async {
       .then((DocumentSnapshot doc) {
     return doc.data() as Map<String, dynamic>;
   }, onError: (e) => debugPrint("Error getting document: $e"));
-
   QuerySnapshot chats = await db
       .collection("Chats")
       .where('user1', isEqualTo: patient["id"])
@@ -488,4 +487,27 @@ void createConversation(Map<String, dynamic> payload, String? uid) async {
     "senderID": phys.id,
     "time_sent": timeSent,
   });
+}
+
+Future<List<dynamic>> retrieveMessagesFromChat(docID) async {  
+  Map<dynamic, dynamic> patient = await db
+      .collection("Patient")
+      .doc(docID)
+      .get()
+      .then((DocumentSnapshot doc) {
+    return doc.data() as Map<String, dynamic>;
+  }, onError: (e) => debugPrint("Error getting document: $e"));
+
+  QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user1', isEqualTo: patient["id"])
+      .get();
+
+  final allData = [];
+  for (var chatDoc in chats.docs) {
+    Map<String, dynamic> chat =
+        chatDoc.data() as Map<String, dynamic>;
+    allData.add(chat);
+  }
+  return allData;
 }
