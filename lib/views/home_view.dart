@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             const FractionallySizedBox(
               widthFactor: .80,
               child: Image(
-                  image: AssetImage("assets/images/pallilink.webp"),
+                  image: AssetImage("assets/images/pallilink.png"),
                   fit: BoxFit.fitWidth),
             ),
             const SizedBox(height: 10),
