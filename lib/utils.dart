@@ -1,11 +1,17 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pallinet/constants.dart';
 
 import 'models/patient_model.dart';
+
+timestampToDate(time) {
+  Timestamp t = time as Timestamp;
+  return t.toDate();
+}
 
 emailValidation(value) {
   if (value == null || value.isEmpty) {

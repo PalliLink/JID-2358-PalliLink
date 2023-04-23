@@ -6,6 +6,7 @@ import 'package:pallinet/constants.dart';
 import 'package:pallinet/models/medication_model.dart';
 import 'package:pallinet/models/treatment_model.dart';
 import 'package:pallinet/models/patient_model.dart';
+import 'package:pallinet/utils.dart';
 import '../models/physician_model.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
@@ -158,8 +159,7 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo(uid) async {
   List<dynamic> data = list["patients"];
   List<PatientID> patients = data.map((e) {
     Gender gender = e["gender"] == "M" ? Gender.male : Gender.female;
-    Timestamp t = e["birthdate"] as Timestamp;
-    DateTime birthdate = t.toDate();
+    DateTime birthdate = timestampToDate(e["birthdate"]);
 
     return PatientID(e["name"], gender, e["id"], birthdate);
   }).toList();
@@ -176,14 +176,8 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo(uid) async {
   List<Map<String, dynamic>> appointmentTime = availability.map((e) {
     Map<String, dynamic> times = {};
 
-    Timestamp timestampStart = e["scheduledTimeStart"] as Timestamp;
-    Timestamp timestampEnd = e["scheduledTimeEnd"] as Timestamp;
-
-    DateTime timeStart = timestampStart.toDate();
-    DateTime timeEnd = timestampEnd.toDate();
-
-    times["timeStart"] = timeStart;
-    times["timeEnd"] = timeEnd;
+    times["timeStart"] = timestampToDate(e["scheduledTimeStart"]);
+    times["timeEnd"] = timestampToDate(e["timestampEnd"]);
     times["appointmentType"] = e["appointmentType"];
     times["patient"] = e["patient"];
 
@@ -224,9 +218,7 @@ void cancelAppointment(String id) async {
   await docRef.delete();
 }
 
-
 // Updates the End of Life Plans for the given patient
-
 void updateEndOfLifePlans(Map<String, dynamic> payload, String uid) async {
   debugPrint("updateEndOfLifePlans");
   var docRef = db.collection("Patient").doc(uid);
@@ -339,7 +331,7 @@ Future<List<dynamic>> retrieveAppointmentsPhysicians(uid) async {
   return allData;
 }
 
-Future<List<dynamic>> retrieveAppointmentsPatients(uid) async {
+Future<Map<String, dynamic>> retrieveAppointmentsPatients(uid) async {
   Map<dynamic, dynamic> patient = await db
       .collection("Patient")
       .doc(uid)
@@ -353,7 +345,8 @@ Future<List<dynamic>> retrieveAppointmentsPatients(uid) async {
       .where('patient', isEqualTo: patient["name"]["text"])
       .get();
 
-  final allData = [];
+  List past = [];
+  List future = [];
   for (var appointmentDoc in appointments.docs) {
     Map<String, dynamic> appointment =
         appointmentDoc.data() as Map<String, dynamic>;
@@ -365,9 +358,20 @@ Future<List<dynamic>> retrieveAppointmentsPatients(uid) async {
     Map<String, dynamic> phys =
         physicians.docs.first.data() as Map<String, dynamic>;
     appointment['practitioner'] = phys['name']['text'];
-    allData.add(appointment);
+    appointment['scheduledTimeStart'] =
+        timestampToDate(appointment['scheduledTimeStart']);
+    appointment['scheduledTimeEnd'] =
+        timestampToDate(appointment['scheduledTimeEnd']);
+    if (DateTime.now().isAfter(appointment['scheduledTimeStart'])) {
+      past.add(appointment);
+    } else {
+      future.add(appointment);
+    }
+    // allData.add(appointment);
+    // debugPrint(allData.toString());
   }
-  return allData;
+
+  return {'past': past, 'future': future};
 }
 
 Future<Map<dynamic, dynamic>>? retrieveAppointment(id) async {
