@@ -196,7 +196,7 @@ void createAppointment(Map<String, dynamic> payload, String? uid) async {
   final docRef = db.collection("Appointment").doc();
 
   Physician phys = await retrievePhysicianProfile(uid);
-
+  debugPrint(payload["id"]);
   await docRef.set({
     "appointmentID": docRef.id,
     "patient": payload["patient"],
@@ -383,4 +383,136 @@ Future<Map<dynamic, dynamic>>? retrieveAppointment(id) async {
     return res.docs.single.data();
   });
   return appointmentDetails;
+}
+
+Future<List<dynamic>> retrieveMessagesPhysicians(uid) async {  
+  Map<dynamic, dynamic> physician = await db
+      .collection("Practitioner")
+      .doc(uid)
+      .get()
+      .then((DocumentSnapshot doc) {
+    return doc.data() as Map<String, dynamic>;
+  }, onError: (e) => debugPrint("Error getting document: $e"));
+
+  QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user2', isEqualTo: physician["id"])
+      .get();
+
+  final allData = [];
+  for (var chatDoc in chats.docs) {
+    Map<String, dynamic> chat =
+        chatDoc.data() as Map<String, dynamic>;
+    allData.add(chat);
+  }
+  return allData;
+}
+Future<List<dynamic>> retrieveMessagesPatients(uid) async {  
+  Map<dynamic, dynamic> patient = await db
+      .collection("Patient")
+      .doc(uid)
+      .get()
+      .then((DocumentSnapshot doc) {
+    return doc.data() as Map<String, dynamic>;
+  }, onError: (e) => debugPrint("Error getting document: $e"));
+  QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user1', isEqualTo: patient["id"])
+      .get();
+
+  final allData = [];
+  for (var chatDoc in chats.docs) {
+    Map<String, dynamic> chat =
+        chatDoc.data() as Map<String, dynamic>;
+    allData.add(chat);
+  }
+  return allData;
+}
+
+Future<Map<String, dynamic>>? retrieveChatCreationInfo(uid) async {
+  //retrieving patients
+  final pracRef = db.collection("Practitioner").doc(uid);
+
+  Map<dynamic, dynamic> list = await pracRef.get().then((DocumentSnapshot doc) {
+    return doc.data() as Map<String, dynamic>;
+  }, onError: (e) => debugPrint("Error getting document: $e"));
+
+  String physID = list["id"];
+
+  // parsing patient list
+  List<dynamic> data = list["patients"];
+  List<PatientID> patients = data.map((e) {
+    Gender gender = e["gender"] == "M" ? Gender.male : Gender.female;
+    Timestamp t = e["birthdate"] as Timestamp;
+    DateTime birthdate = t.toDate();
+
+    return PatientID(e["name"], gender, e["id"], birthdate);
+  }).toList();
+  for(int i = patients.length - 1; i > -1; i--) {
+     QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user1', isEqualTo: patients[i].id)
+      .get();
+    final allData = chats.docs.map((doc) => doc.data()).toList();
+    if (allData.length > 0) {
+      patients.remove(patients[i]);
+    }
+
+  }
+  Map<String, dynamic> map = {};
+  map["patients"] = patients;
+  return map;
+}
+
+void createConversation(Map<String, dynamic> payload, String? uid) async {
+
+  final docRef = db.collection("Chats").doc();
+  final docRefMessage = db.collection("Chats").doc(docRef.id).collection("Messages").doc();
+
+  Physician phys = await retrievePhysicianProfile(uid);
+  String user1 = payload["patient_id"];
+  String user2 = phys.id;
+  String user1Name = payload["patient"];
+  String user2Name = phys.name;
+  String message = payload["message"];
+
+  DateTime date = DateTime.now();
+  Timestamp timeSent = Timestamp.fromDate(date);
+  await docRef.set({
+    "chatID": docRef.id,
+    "lastMessage": message,
+    "time_sent": timeSent,
+    "user1": user1,
+    "user1_name": user1Name,
+    "user2": user2,
+    "user2_name": user2Name,
+  });
+  await docRefMessage.set({
+    "message":message,
+    "senderID": phys.id,
+    "time_sent": timeSent,
+  });
+}
+
+Future<List<dynamic>> retrieveMessagesFromChat(docID) async {  
+  Map<dynamic, dynamic> patient = await db
+      .collection("Patient")
+      .doc(docID)
+      .get()
+      .then((DocumentSnapshot doc) {
+    return doc.data() as Map<String, dynamic>;
+  }, onError: (e) => debugPrint("Error getting document: $e"));
+
+  QuerySnapshot chats = await db
+      .collection("Chats")
+      .where('user1', isEqualTo: patient["id"])
+      .get();
+
+  final allData = [];
+  for (var chatDoc in chats.docs) {
+    Map<String, dynamic> chat =
+        chatDoc.data() as Map<String, dynamic>;
+    allData.add(chat);
+  }
+  return allData;
 }
