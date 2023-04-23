@@ -484,8 +484,8 @@ void createConversation(Map<String, dynamic> payload, String? uid) async {
     "user2_name": user2Name,
   });
   await docRefMessage.set({
-    "message": docRef.id,
-    "senderID": message,
+    "message":message,
+    "senderID": phys.id,
     "time_sent": timeSent,
   });
 }
