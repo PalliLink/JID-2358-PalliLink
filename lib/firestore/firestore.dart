@@ -226,7 +226,7 @@ void cancelAppointment(String id) async {
 
 
 // Updates the End of Life Plans for the given patient
-=======
+
 void updateEndOfLifePlans(Map<String, dynamic> payload, String uid) async {
   debugPrint("updateEndOfLifePlans");
   var docRef = db.collection("Patient").doc(uid);
