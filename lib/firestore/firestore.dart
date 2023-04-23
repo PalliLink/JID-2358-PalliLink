@@ -159,8 +159,7 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo(uid) async {
   List<dynamic> data = list["patients"];
   List<PatientID> patients = data.map((e) {
     Gender gender = e["gender"] == "M" ? Gender.male : Gender.female;
-    Timestamp t = e["birthdate"] as Timestamp;
-    DateTime birthdate = t.toDate();
+    DateTime birthdate = timestampToDate(e["birthdate"]);
 
     return PatientID(e["name"], gender, e["id"], birthdate);
   }).toList();
@@ -177,14 +176,8 @@ Future<Map<String, dynamic>>? retrieveAppointmentCreationInfo(uid) async {
   List<Map<String, dynamic>> appointmentTime = availability.map((e) {
     Map<String, dynamic> times = {};
 
-    Timestamp timestampStart = e["scheduledTimeStart"] as Timestamp;
-    Timestamp timestampEnd = e["scheduledTimeEnd"] as Timestamp;
-
-    DateTime timeStart = timestampStart.toDate();
-    DateTime timeEnd = timestampEnd.toDate();
-
-    times["timeStart"] = timeStart;
-    times["timeEnd"] = timeEnd;
+    times["timeStart"] = timestampToDate(e["scheduledTimeStart"]);
+    times["timeEnd"] = timestampToDate(e["timestampEnd"]);
     times["appointmentType"] = e["appointmentType"];
     times["patient"] = e["patient"];
 
