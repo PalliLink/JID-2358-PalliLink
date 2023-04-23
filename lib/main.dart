@@ -53,8 +53,11 @@ class PalliNet extends StatelessWidget {
           '/physician/profile': (context) => const ProfileContent(),
           '/forgotsuccess': (context) => const ForgotSuccess(),
           '/chart': (context) => const Chart(),
-          '/contacts': (context) => const ContactsPage(),
+          '/contacts/patients': (context) => const ContactsPagePatient(),
+          '/contacts/physicians': (context) => const ContactsPagePhysician(),
           '/facilities': (context) => const FacilitiesPage(),
+          '/physician/chat/new': (context) => const CreateConversation(),
+          '/chatpage': (context) => const ChatPage(),
         },
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const HomePage()));

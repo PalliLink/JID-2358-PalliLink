@@ -61,7 +61,7 @@ class _PhysicianHomeState extends State<PhysicianHome> {
                   CustomButton(
                     icon: Icons.people,
                     iconColor: Colors.pink,
-                    route: '/contacts',
+                    route: '/contacts/physicians',
                     text: 'Messages',
                   ),
                   gap(),
