@@ -224,11 +224,9 @@ void cancelAppointment(String id) async {
   await docRef.delete();
 }
 
-// TODO Update Patient profile (currently hardcoded)
-void updateEndOfLifePlans(Map<String, dynamic> payload) async {
+void updateEndOfLifePlans(Map<String, dynamic> payload, String uid) async {
   debugPrint("updateEndOfLifePlans");
-  var docRef = db.collection("Patient").doc("mpMQADgfZqMPo25LQkw8ZcgKmTw2");
-
+  var docRef = db.collection("Patient").doc(uid);
   await docRef.update({"description": payload["description"]});
 }
 
