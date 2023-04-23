@@ -15,8 +15,8 @@ class ForgotPage extends StatelessWidget {
                 ? Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      Logo(),
-                      FormContent(),
+                      _Logo(),
+                      _FormContent(),
                     ],
                   )
                 : Container(
@@ -24,9 +24,9 @@ class ForgotPage extends StatelessWidget {
                     constraints: const BoxConstraints(maxWidth: 800),
                     child: Row(
                       children: const [
-                        Expanded(child: Logo()),
+                        Expanded(child: _Logo()),
                         Expanded(
-                          child: Center(child: FormContent()),
+                          child: Center(child: _FormContent()),
                         ),
                       ],
                     ),
@@ -34,8 +34,8 @@ class ForgotPage extends StatelessWidget {
   }
 }
 
-class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
 
   Widget gap() => const SizedBox(height: 30);
 
@@ -72,14 +72,14 @@ class Logo extends StatelessWidget {
   }
 }
 
-class FormContent extends StatefulWidget {
-  const FormContent({Key? key}) : super(key: key);
+class _FormContent extends StatefulWidget {
+  const _FormContent({Key? key}) : super(key: key);
 
   @override
-  State<FormContent> createState() => FormContentState();
+  State<_FormContent> createState() => _FormContentState();
 }
 
-class FormContentState extends State<FormContent> {
+class _FormContentState extends State<_FormContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? email;
 

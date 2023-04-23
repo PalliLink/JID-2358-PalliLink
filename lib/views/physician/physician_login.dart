@@ -15,16 +15,16 @@ class PhysicianLogin extends StatelessWidget {
             child: SingleChildScrollView(
       child: Column(
         children: const [
-          Logo(),
-          FormContent(),
+          _Logo(),
+          _FormContent(),
         ],
       ),
     )));
   }
 }
 
-class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
 
   Widget gap() => const SizedBox(height: 30);
 
@@ -54,14 +54,14 @@ class Logo extends StatelessWidget {
   }
 }
 
-class FormContent extends StatefulWidget {
-  const FormContent({Key? key}) : super(key: key);
+class _FormContent extends StatefulWidget {
+  const _FormContent({Key? key}) : super(key: key);
 
   @override
-  State<FormContent> createState() => FormContentState();
+  State<_FormContent> createState() => _FormContentState();
 }
 
-class FormContentState extends State<FormContent> {
+class _FormContentState extends State<_FormContent> {
   bool isPasswordVisible = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -128,7 +128,7 @@ class FormContentState extends State<FormContent> {
                 onPressed: () {
                   _formKey.currentState?.save();
                   if (_formKey.currentState?.validate() ?? false) {
-                    attemptLogin({
+                    _attemptLogin({
                       "email": email,
                       "password": password,
                       "userType": UserType.practitioner,
@@ -138,25 +138,26 @@ class FormContentState extends State<FormContent> {
               ),
             ),
             gap(),
-            // SizedBox(
-            //   // DEBUGGING LOGIN
-            //   width: double.infinity,
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            //     ),
-            //     child: const Padding(
-            //       padding: EdgeInsets.all(10.0),
-            //       child: Text(
-            //         'DEBUGGING LOGIN',
-            //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       debugLogin(context);
-            //     },
-            //   ),
-            // ),
+            SizedBox(
+              // DEBUGGING LOGIN
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'DEBUGGING LOGIN',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                onPressed: () {
+                  _debugLogin(context);
+                },
+              ),
+            ),
             InkWell(
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
@@ -175,47 +176,21 @@ class FormContentState extends State<FormContent> {
   Widget gap() => const SizedBox(height: 16);
 }
 
-attemptLogin(payload, context) {
+_attemptLogin(payload, context) {
   signIn(payload).then((status) => {
         if (status == AuthStatus.success)
           {Navigator.pushNamed(context, "/physician/home")}
         else
-          {showSnackbar(context, status)}
+          {_showSnackbar(context, status)}
       });
 }
 
-debugLogin(context) {
+_debugLogin(context) {
   debugPhysician()
       .then((val) => {Navigator.pushNamed(context, "/physician/home")});
 }
 
-showAlertDialog(BuildContext context) {
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Error"),
-    content: const Text("Incorrect password or error!"),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
-
-showSnackbar(BuildContext context, AuthStatus status) {
+_showSnackbar(BuildContext context, AuthStatus status) {
   final snackBar = status == AuthStatus.success
       ? SnackBar(
           content: Text(status.value),

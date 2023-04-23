@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pallinet/models/session_manager.dart';
 
 import '../components/pain_chart.dart';
 
@@ -11,11 +10,11 @@ class Chart extends StatefulWidget {
 }
 
 class _ChartState extends State<Chart> {
-  late final SessionManager _prefs;
+  // late final SessionManager _prefs;
 
   @override
   void initState() {
-    _prefs = SessionManager();
+    // _prefs = SessionManager();
     super.initState();
   }
 

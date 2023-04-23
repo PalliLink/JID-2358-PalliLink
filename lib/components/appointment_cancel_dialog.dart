@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pallinet/firestore/firestore.dart';
 
-Future<void> CancelDialog(BuildContext context, String id, String name,
+Future<void> cancelDialog(BuildContext context, String id, String name,
     DateTime date, Function callback) {
   return showDialog<void>(
     context: context,
