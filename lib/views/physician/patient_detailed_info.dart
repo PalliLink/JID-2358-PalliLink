@@ -6,11 +6,14 @@ import 'package:pallinet/firestore/firestore.dart';
 
 class PatientDetails extends StatelessWidget {
   const PatientDetails({super.key});
+
+  // Widget used for spacing
   Widget gap() => const SizedBox(
         height: 10,
         // color: Colors.black,
       );
 
+  // Widget for the main information for the patient
   Widget buildInfo(dynamic name, dynamic sex, dynamic age, dynamic mrn) =>
       Column(children: [
         Text(
@@ -44,6 +47,7 @@ class PatientDetails extends StatelessWidget {
         )
       ]);
 
+  // Widget for building the two clickable buttons side by side
   Widget buildButtons() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -92,6 +96,7 @@ class PatientDetails extends StatelessWidget {
         ],
       );
 
+  // Widget for Pain Charts button and edit details button for patient
   @override
   Widget build(BuildContext context) {
     debugPrint(ModalRoute.of(context)?.settings.arguments.toString());
