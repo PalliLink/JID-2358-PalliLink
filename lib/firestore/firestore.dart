@@ -352,7 +352,21 @@ Future<List<dynamic>> retrieveAppointmentsPatients(uid) async {
       .collection("Appointment")
       .where('patient', isEqualTo: patient["name"]["text"])
       .get();
-  final allData = appointments.docs.map((doc) => doc.data()).toList();
+
+  final allData = [];
+  for (var appointmentDoc in appointments.docs) {
+    Map<String, dynamic> appointment =
+        appointmentDoc.data() as Map<String, dynamic>;
+    debugPrint('data ${appointment.toString()}');
+    QuerySnapshot physicians = await db
+        .collection('Practitioner')
+        .where('id', isEqualTo: appointment['id'])
+        .get();
+    Map<String, dynamic> phys =
+        physicians.docs.first.data() as Map<String, dynamic>;
+    appointment['practitioner'] = phys['name']['text'];
+    allData.add(appointment);
+  }
   return allData;
 }
 
