@@ -5,6 +5,7 @@ import 'package:pallinet/components/scheduler.dart';
 import 'package:pallinet/constants.dart';
 import 'package:pallinet/firestore/firestore.dart';
 import 'package:pallinet/models/patient_model.dart';
+import 'package:pallinet/models/session_manager.dart';
 import 'package:pallinet/utils.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -28,13 +29,20 @@ class AppointmentContent extends StatefulWidget {
 }
 
 class AppointmentContentState extends State<AppointmentContent> {
+  late final SessionManager _prefs;
+
+  @override
+  void initState() {
+    _prefs = SessionManager();
+    super.initState();
+  }
+
   bool isPasswordVisible = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   PatientID? patient;
   List? practitioners = [];
-  // Physician physician =
   DateTime appointmentDate = DateTime.now();
   DateTime appointmentStart = DateTime.now();
   DateTime appointmentEnd = DateTime.now();
@@ -49,8 +57,10 @@ class AppointmentContentState extends State<AppointmentContent> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: retrieveAppointmentCreationInfo(),
+    return FutureBuilder<Map<String, dynamic>?>(
+      // future: retrieveAppointmentCreationInfo(),
+      future:
+          _prefs.getUid().then((uid) => retrieveAppointmentCreationInfo(uid)),
       builder: ((context, snapshot) {
         // List of physician's patients
         List<PatientID> list = snapshot.data == null
@@ -61,6 +71,8 @@ class AppointmentContentState extends State<AppointmentContent> {
         List<Map> physicianAppointments = snapshot.data == null
             ? []
             : snapshot.data?["appointmentTimes"] as List<Map>;
+
+        // debugPrint(physicianAppointments.toString());
         return Stack(children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -224,7 +236,9 @@ class AppointmentContentState extends State<AppointmentContent> {
                               "scheduledTimeStart": scheduledTimeStart,
                               "scheduledTimeEnd": scheduledTimeEnd,
                             };
-                            createAppointment(payload);
+                            _prefs.getUid().then(
+                                (value) => createAppointment(payload, value));
+                            // createAppointment(payload);
 
                             Navigator.pop(context);
                           }

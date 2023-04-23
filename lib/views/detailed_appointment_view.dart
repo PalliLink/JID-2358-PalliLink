@@ -82,7 +82,7 @@ class AppointmentPage extends StatelessWidget {
                   gap(),
                   ElevatedButton(
                       onPressed: () => {
-                            CancelDialog(context, id, name, start,
+                            cancelDialog(context, id, name, start,
                                 () => Navigator.pop(context))
                           },
                       style: ElevatedButton.styleFrom(

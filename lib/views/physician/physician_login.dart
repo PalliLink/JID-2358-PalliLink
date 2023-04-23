@@ -154,7 +154,7 @@ class _FormContentState extends State<_FormContent> {
                   ),
                 ),
                 onPressed: () {
-                  debugLogin(context);
+                  _debugLogin(context);
                 },
               ),
             ),
@@ -188,32 +188,6 @@ _attemptLogin(payload, context) {
 _debugLogin(context) {
   debugPhysician()
       .then((val) => {Navigator.pushNamed(context, "/physician/home")});
-}
-
-_showAlertDialog(BuildContext context) {
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Error"),
-    content: const Text("Incorrect password or error!"),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
 
 _showSnackbar(BuildContext context, AuthStatus status) {
