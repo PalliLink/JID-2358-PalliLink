@@ -39,6 +39,7 @@ class PlanContentState extends State<PlanContent> {
 
   String? desc = "gkyhuiadfsss";
 
+// Widget for both displaying End of Life Plans and updating them to firestore
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Patient?>(
