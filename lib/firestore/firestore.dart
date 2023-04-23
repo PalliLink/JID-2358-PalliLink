@@ -224,6 +224,9 @@ void cancelAppointment(String id) async {
   await docRef.delete();
 }
 
+
+// Updates the End of Life Plans for the given patient
+=======
 void updateEndOfLifePlans(Map<String, dynamic> payload, String uid) async {
   debugPrint("updateEndOfLifePlans");
   var docRef = db.collection("Patient").doc(uid);
@@ -245,6 +248,7 @@ Future<Patient>? retrievePatientProfile(uid) async {
   return Patient.fromJson(patientInfo);
 }
 
+// Retrieves the Physicians Profile given the UID
 Future<Physician> retrievePhysicianProfile(uid) async {
   // debugPrint("retrievePhysicianProfile");
   var docRef = db.collection("Practitioner").doc(uid);
@@ -265,6 +269,7 @@ Future<Physician> retrievePhysicianProfile(uid) async {
   return physician;
 }
 
+// Updates the information in the Physician profile
 void updatePhysicianProfile(String uid, Map<String, dynamic> payload) async {
   debugPrint("updatePhysicianProfile");
   var docRef = db.collection("Practitioner").doc(uid);
@@ -290,6 +295,7 @@ Future<Map<dynamic, dynamic>>? retrievePatientDetails(id) async {
   return patientDetails;
 }
 
+// Updates the Patient Detials given the UID and the new data
 void updatePatientDetails(Map<dynamic, dynamic> data, id) async {
   debugPrint(id);
   final patientRef = await db

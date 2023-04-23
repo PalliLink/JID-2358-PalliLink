@@ -57,19 +57,19 @@ class PlanContentState extends State<PlanContent> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    gap(),
-                    gap(),
-                    const Text(
-                      'Update End of Life Plans',
-                      textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
+                    // gap(),
+                    // gap(),
+                    // const Text(
+                    //   'Update End of Life Plans',
+                    //   textAlign: TextAlign.left,
+                    //   style:
+                    //       TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    // ),
                     gap(),
                     TextFormField(
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      minLines: 3,
+                      minLines: 5,
                       initialValue: desc,
                       onSaved: (value) => {desc = value},
                       decoration: const InputDecoration(
