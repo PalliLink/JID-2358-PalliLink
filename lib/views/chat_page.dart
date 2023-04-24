@@ -76,30 +76,39 @@ class _ChatPageState extends State<ChatPage> {
           ),
           gap(),
           gap(),
-          TextFormField(
-              validator: (value) => requiredValue(value),
-              controller: messageController,
-              decoration: InputDecoration(
-                  labelText: 'Message',
-                  hintText: 'Enter a message',
-                  
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () {
-                      setState(() {
-                        newMessage = messageController.text;
-                      });
-                      sendMessage(arguments, newMessage);
-                    },
-                  )
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+                validator: (value) => requiredValue(value),
+                controller: messageController,
+                minLines: 1,
+                maxLines: 20,
+                decoration: InputDecoration(
+                    labelText: 'Message',
+                    hintText: 'Enter a message',
                     
-                  ),
-            ),
-          const Divider(
-          height: 80,
-          color: Colors.white,
-        )
+                    border: const UnderlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () {
+                        setState(() {
+                          newMessage = messageController.text;
+                        });
+                        debugPrint(newMessage);
+                        if (newMessage.isNotEmpty) {
+                          sendMessage(arguments, newMessage);
+                        }
+                      },
+                    )
+                      
+                    ),
+              ),
+          ),
+          const SizedBox(height: 20),
+        //   const Divider(
+        //   height: 80,
+        //   color: Colors.white,
+        // )
         ],
         ));
   }
