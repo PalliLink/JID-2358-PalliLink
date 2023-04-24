@@ -29,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
     }
   Widget gap() => const Divider(
           height: 10,
-          color: Colors.black,
+          color: Colors.white,
         );
   @override
   Widget build(BuildContext context) {
@@ -73,6 +73,8 @@ class _ChatPageState extends State<ChatPage> {
               }
             )
           ),
+          gap(),
+          gap(),
           TextFormField(
               validator: (value) => requiredValue(value),
               controller: messageController,
@@ -93,6 +95,10 @@ class _ChatPageState extends State<ChatPage> {
                     
                   ),
             ),
+          const Divider(
+          height: 80,
+          color: Colors.white,
+        )
         ],
         ));
   }
