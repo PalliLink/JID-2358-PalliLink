@@ -54,9 +54,11 @@ class _ContactsPagePatientState extends State<ContactsPagePatient> {
                   DateTime lastSent = t.toDate();
                   return ContactsCard(
                     name: data["user2_name"],
+                    otherName: data["user1_name"],
                     id: data["chatID"],
                     lastMessage: data["lastMessage"],
                     timeSent: lastSent,
+                    user: "p",
                     refresh: () => refresh(),
                   );
                 },

@@ -8,13 +8,12 @@ class ChatCard extends StatelessWidget {
   const ChatCard(
       {super.key,
       required this.name,
-      required this.id,
       required this.lastMessage,
       required this.timeSent,
       required this.refresh});
 
   final String name;
-  final String id;
+
   final String lastMessage;
   final DateTime timeSent;
   final Function refresh;
@@ -71,7 +70,7 @@ class _ChatDescription extends StatelessWidget {
             ),
           ),
           Text(
-            'Message: $lastMessage',
+            lastMessage,
             style: const TextStyle(fontSize: 16.0),
           ),
           Text(
