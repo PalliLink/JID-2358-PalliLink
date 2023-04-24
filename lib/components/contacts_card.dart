@@ -8,22 +8,27 @@ class ContactsCard extends StatelessWidget {
   const ContactsCard(
       {super.key,
       required this.name,
+      required this.otherName,
       required this.id,
       required this.lastMessage,
       required this.timeSent,
+      required this.user,
       required this.refresh});
 
   final String name;
+  final String otherName;
   final String id;
   final String lastMessage;
   final DateTime timeSent;
+  final String user;
   final Function refresh;
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
         onTap: () => {
               Navigator.pushNamed(context, "/chatpage",
-                      arguments: id)
+                      arguments: [id, name, otherName])
                   .then((_) => refresh())
             },
         child: Card(
@@ -62,6 +67,12 @@ class _ContactDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String displayMessage = "";
+    if (lastMessage.length > 20) {
+      displayMessage = lastMessage.substring(0,10) + "...";
+    } else{
+      displayMessage = lastMessage;
+    }
     initializeDateFormatting('en,', null);
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0.0, 0.0, 0.0),
@@ -76,7 +87,7 @@ class _ContactDescription extends StatelessWidget {
             ),
           ),
           Text(
-            'Message: $lastMessage',
+            'Message: $displayMessage',
             style: const TextStyle(fontSize: 16.0),
           ),
           Text(

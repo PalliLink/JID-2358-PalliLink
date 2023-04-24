@@ -489,30 +489,40 @@ void createConversation(Map<String, dynamic> payload, String? uid) async {
   });
   await docRefMessage.set({
     "message":message,
-    "senderID": phys.id,
+    "SenderName": phys.name,
     "time_sent": timeSent,
   });
 }
 
-Future<List<dynamic>> retrieveMessagesFromChat(docID) async {  
-  Map<dynamic, dynamic> patient = await db
-      .collection("Patient")
-      .doc(docID)
-      .get()
-      .then((DocumentSnapshot doc) {
-    return doc.data() as Map<String, dynamic>;
-  }, onError: (e) => debugPrint("Error getting document: $e"));
-
-  QuerySnapshot chats = await db
+Stream<QuerySnapshot> retrieveMessagesFromChat(docID)  {  
+  Stream<QuerySnapshot> chat = db
       .collection("Chats")
-      .where('user1', isEqualTo: patient["id"])
-      .get();
+      .doc(docID)
+      .collection("Messages")
+      .orderBy('time_sent',descending: true)
+      .snapshots();
 
-  final allData = [];
-  for (var chatDoc in chats.docs) {
-    Map<String, dynamic> chat =
-        chatDoc.data() as Map<String, dynamic>;
-    allData.add(chat);
-  }
-  return allData;
+  return chat;
+}
+
+
+void sendMessage(arguments, message) {
+  debugPrint("entry");
+  debugPrint(arguments[0]);
+  DateTime date = DateTime.now();
+  Timestamp timeSent = Timestamp.fromDate(date);
+  final chatroomRef = db.collection("Chats").doc(arguments[0]);
+  debugPrint("i worked");
+  final docRefMessage = db.collection("Chats").doc(arguments[0]).collection("Messages").doc();
+  debugPrint("i also worked");
+  chatroomRef.update({
+    "lastMessage": message,
+    "time_sent": timeSent,
+  });
+  docRefMessage.set({
+    "SenderName": arguments[2],
+    "message": message,
+    "time_sent": timeSent,
+  });
+
 }

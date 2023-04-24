@@ -8,13 +8,12 @@ class ChatCard extends StatelessWidget {
   const ChatCard(
       {super.key,
       required this.name,
-      required this.id,
       required this.lastMessage,
       required this.timeSent,
       required this.refresh});
 
   final String name;
-  final String id;
+
   final String lastMessage;
   final DateTime timeSent;
   final Function refresh;
@@ -27,10 +26,6 @@ class ChatCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Expanded(
-                flex: 1,
-                child: Icon(Icons.account_circle, size: 48),
-              ),
               Expanded(
                 flex: 4,
                 child: _ChatDescription(
@@ -57,9 +52,8 @@ class _ChatDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting('en,', null);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(16, 10.0, 16.0, .0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -67,17 +61,30 @@ class _ChatDescription extends StatelessWidget {
             name,
             style: const TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 20.0,
+              fontSize: 18.0,
             ),
           ),
-          Text(
-            'Message: $lastMessage',
+          Padding(padding: const EdgeInsets.fromLTRB(0, 6, 10.0, 12.0),
+          
+          child:Text(
+            lastMessage,
             style: const TextStyle(fontSize: 16.0),
           ),
-          Text(
-            DateFormat('h:mm a').format(timeSent),
-            style: const TextStyle(fontSize: 12.0),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:[
+              
+              Text(
+                DateFormat('MM-dd-yyyy').format(timeSent),
+                style: const TextStyle(fontSize: 12.0),
+               ),
+               Text(
+                DateFormat('h:mm a').format(timeSent),
+                style: const TextStyle(fontSize: 12.0),
+              ),
+          ])
+        
         ],
       ),
     );

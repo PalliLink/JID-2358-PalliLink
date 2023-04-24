@@ -55,9 +55,11 @@ class _ContactsPagePhysicianState extends State<ContactsPagePhysician> {
                   DateTime lastSent = t.toDate();
                   return ContactsCard(
                     name: data["user1_name"],
+                    otherName: data["user2_name"],
                     id: data["chatID"],
                     lastMessage: data["lastMessage"],
                     timeSent: lastSent,
+                    user: "ph",
                     refresh: () => refresh(),
                   );
                 },
