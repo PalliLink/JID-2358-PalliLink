@@ -10,14 +10,29 @@ We are creating PalliLink in order to make palliative care specialists more acce
 
 PalliLink will not only provide access to palliative care specialists, but also provide an easy way for primary healthcare providers to see how patients react to care and plan repeat appointments and/or referrals to specialists
 # Installation Guide
-## Pre-Requisites:
-### 
+## Pre-Requisites
+### Requires a computer that can run an emulator (300 MB of disk space)
+### Emulator will require at least 4GB of RAM to run on its own 
+### [Android Studio](https://developer.android.com/studio)
+### [VS Code](https://code.visualstudio.com/) 
 
 ## Dependent Libraries that must be installed:
-## Download Instructions:
+### Install Flutter and its dependencies following instructions from [here](https://docs.flutter.dev/get-started/install)
+
+## Download Instructions
+### Download PalliLink from [here](https://github.com/PalliLink/JID-2358-PalliLink) as either a Zip file or using Git to clone into a folder
+    * See how to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). And how to clone into a folder[here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+* Download and install Flutter and its dependencies. The link can be found [here](https://docs.flutter.dev/get-started/install)
+* Open VS Code and download the Dart and Flutter extensions from the extensions tab.
+* Upon finishing the download, restart VS Code to make sure extensions are enabled.
+* Open a new terminal in VS Code and run 'pub get' to retrieve the dependencies.
+
 ## Installation of actual applications
-## Run Instructions:
-## Troubleshooting:
+### 
+## Run Instructions
+## Troubleshooting
+* There are sometimes issues when running the emulator directly from VS Code. The emulator could begin but not fully connect to VS Code. To fix this, make sure that no emulator is running through android studio or is open. Then click on devices and cold start the emulator. This should resolve the issue but if it continues, a restart of your computer may help.
+* A way to avoid the previous issue would be to open android studio dependently and starting an emulator through from there. This will take more time to start the application than directly running from VS Code. 
 
 # Release Notes: 
 ## Version 1.0.0
