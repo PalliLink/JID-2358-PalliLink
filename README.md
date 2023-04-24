@@ -9,8 +9,32 @@ Many studies have been done confirming the benefits of early palliative care suc
 We are creating PalliLink in order to make palliative care specialists more accessible for patients. Patients will be able to set up meetings with palliative care experts and easily share prescribed treatments and results with their existing primary care provider. The app will serve as a hub for all palliative care treatment results and will be the patient’s primary gateway to communicate with their palliative care provider.
 
 PalliLink will not only provide access to palliative care specialists, but also provide an easy way for primary healthcare providers to see how patients react to care and plan repeat appointments and/or referrals to specialists
+# Installation Guide
+## Pre-Requisites:
+### 
+
+## Dependent Libraries that must be installed:
+## Download Instructions:
+## Installation of actual applications
+## Run Instructions:
+## Troubleshooting:
 
 # Release Notes: 
+## Version 1.0.0
+### :health_worker: New Features:
+* Implemented Chat feature
+* Set up system so physicians can create chat rooms with patients
+* Set up more questions for pain diary entry to assess new pain
+* Created seperate graph to showcase new pains experienced by the patient
+
+### :hammer_and_wrench: Bug Fixes:
+* ParentDataWidget issue in patient details has been resolved
+
+### :radioactive: Known Issues:
+* Calendar UI has a two weeks button that will crash the app 
+* The calendar when in scheduling appointments has an overflow when using a specific appointment type
+
+
 ## Version 0.4.0 
 ### :health_worker: New Features:
 * Setup barebone chat UI
