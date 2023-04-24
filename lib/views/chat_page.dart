@@ -36,8 +36,9 @@ class _ChatPageState extends State<ChatPage> {
     String newMessage = "";
     TextEditingController messageController = TextEditingController();
     List<dynamic> arguments = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+    String otherUser = arguments[1].split(" ")[0];
     return Scaffold(
-        appBar: AppBar(title: const Text("Chatting")),
+        appBar: AppBar(title:  Text("Chat with $otherUser")),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
