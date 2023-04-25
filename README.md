@@ -9,8 +9,53 @@ Many studies have been done confirming the benefits of early palliative care suc
 We are creating PalliLink in order to make palliative care specialists more accessible for patients. Patients will be able to set up meetings with palliative care experts and easily share prescribed treatments and results with their existing primary care provider. The app will serve as a hub for all palliative care treatment results and will be the patient’s primary gateway to communicate with their palliative care provider.
 
 PalliLink will not only provide access to palliative care specialists, but also provide an easy way for primary healthcare providers to see how patients react to care and plan repeat appointments and/or referrals to specialists
+# Installation Guide
+## Pre-Requisites
+* Requires a computer that can run an emulator (300 MB of disk space)
+* Emulator will require at least 4GB of RAM to run on its own 
+* [Android Studio](https://developer.android.com/studio)
+* [VS Code](https://code.visualstudio.com/) 
+
+## Dependent Libraries that must be installed:
+* Install Flutter and its dependencies following instructions from [here](https://docs.flutter.dev/get-started/install)
+
+## Download Instructions
+* Download PalliLink from [here](https://github.com/PalliLink/JID-2358-PalliLink) as either a Zip file or using Git to clone into a folder
+    * See how to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). And how to clone into a folder[here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+* Download and install Flutter and its dependencies. The link can be found [here](https://docs.flutter.dev/get-started/install)
+* Open VS Code and download the Dart and Flutter extensions from the extensions tab.
+* Upon finishing the download, restart VS Code to make sure extensions are enabled.
+* Open a new terminal in VS Code and run 'pub get' to retrieve the dependencies for Flutter.
+
+## Run Instructions
+* Open VS Code and open the folder named JID-2358-PALLILINK
+* Click the bottom right corner labeled as either denoting your operating system. This will open a new menu which will let you create an Android emulator. If you are unable to create an emulator, then your Android Studio may not be set up correctly.
+* Once your Android emulator has been set up, you can again open that menu and click on the android device to begin the emulator.
+* Wait for the emulator to begin running and then you can move to main.dart in the lib folder. 
+* Click run at the top of VS Code and then either run with or without debugging. This will open a drop down where you must click on the emulator running you are running.
+* Once VS Code finishes running, the PalliLink application should be running on your emulator
+
+
+## Troubleshooting
+* There are sometimes issues when running the emulator directly from VS Code. The emulator could begin but not fully connect to VS Code. To fix this, make sure that no emulator is running through android studio or is open. Then click on devices and cold start the emulator. This should resolve the issue but if it continues, a restart of your computer may help.
+* A way to avoid the previous issue would be to open android studio dependently and starting an emulator through from there. This will take more time to start the application than directly running from VS Code. 
 
 # Release Notes: 
+## Version 1.0.0
+### :health_worker: New Features:
+* Implemented Chat feature
+* Set up system so physicians can create chat rooms with patients
+* Set up more questions for pain diary entry to assess new pain
+* Created seperate graph to showcase new pains experienced by the patient
+
+### :hammer_and_wrench: Bug Fixes:
+* ParentDataWidget issue in patient details has been resolved
+
+### :radioactive: Known Issues:
+* Calendar UI has a two weeks button that will crash the app 
+* The calendar when in scheduling appointments has an overflow when using a specific appointment type
+
+
 ## Version 0.4.0 
 ### :health_worker: New Features:
 * Setup barebone chat UI
